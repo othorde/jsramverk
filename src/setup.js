@@ -15,7 +15,7 @@ const docs = JSON.parse(fs.readFileSync(
 ));
  
  
- 
+
  // Do it.
 resetCollection( "crowd", docs)
     .catch(err => console.log(err));
