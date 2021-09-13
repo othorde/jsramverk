@@ -11,11 +11,13 @@ function Editor() {
         console.log(datas)
     }
 
-
     return (
     
         <div className="App">
         <div> <button onClick = {getDataToConsoleLog}>Spara</button></div>
+        <div> <button onClick = {getDataToConsoleLog}>Hämta</button></div>
+        <div> <button onClick = {getDataToConsoleLog}>Skapa nytt</button></div>
+
         <h2>Editor komponent: CKEditor</h2>
         <CKEditor
             editor={ ClassicEditor }

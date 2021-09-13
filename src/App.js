@@ -1,12 +1,23 @@
 import React, {Component} from 'react';
-import Editor from './Editor';
+import Home from "./components/Home";
+import Form from "./components/Form";
+
+
+// components
+
+
+//styles
+import { GlobalStyle } from './GlobalStyle';
 
 
 class App extends Component { 
     render() {
         return (
-            <Editor/>
-        );
+            <div className="App">
+            <Form/>
+            <GlobalStyle/>
+            </div>
+            );
     }
 }
 export default App;
