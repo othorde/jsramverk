@@ -4,18 +4,32 @@
  "use strict";
 const database = require("../db/database.js");
 var express = require('express');
+var ObjectId = require('mongodb').ObjectId; 
 
 
 const create = {
     createDocument: async function (req, res) {
-        
+        let doc;
         let db;
         try {
-            db = await database.getDb();         
-            const doc = { /* uppbyggnad av dokumentet */
+            db = await database.getDb(); 
+            
+            doc = { /* uppbyggnad av dokumentet */
                 name: req.body.name, //body.name,
                 body: req.body.body, //body.text
             };
+
+            if (req.body._id) {
+                console.log("ID INSKICKAAAAAAAAAAAAT", req.body._id)
+
+                doc = { /* uppbyggnad av dokumentet */
+                    _id: req.body._id,
+                    name: req.body.name, //body.name,
+                    body: req.body.body, //body.text
+                };
+            } 
+
+          
             if (doc.name !== undefined) {
                 const res = await db.collection.insertOne(doc);
                 return true

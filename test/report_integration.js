@@ -28,7 +28,6 @@ describe('database', () => {
                 .then(async function(info) {
                     if (info) {
                         await db.collection.drop();
-                        await db.collection.insertOne( { _id: ObjectId("101010101010101010101010"), name: "insertedFromBeginning", body: "insertedFromBeginningBody" } );
 
                     }
                 })
@@ -49,6 +48,7 @@ describe('database', () => {
          
 
             let body = {
+                
                 name: "NEWNAME",
                 body: "NEWBODY",
             };
@@ -65,6 +65,32 @@ describe('database', () => {
         });
 
     });
+
+    describe('post, create an doc with specific id', () => {
+        it('', (done) => {
+
+         
+
+            let body = {
+                _id: "101010101010101010101010",
+                name: "name specific id",
+                body: "body specific id",
+
+            };
+
+
+            chai.request(server)
+                .post("/list")
+                .send(body)
+                .end((err, res) => {
+                    res.body.data.msg.should.equal("Got a POST request, sending back 201 Created");
+                    done();
+                });
+
+        });
+
+    });
+
 
 
     describe('GET /', () => {
@@ -88,9 +114,9 @@ describe('database', () => {
                 .get("/list")
                 .end((err, res) => {
                     res.body.should.be.an("array");
-                    res.body[1].body.should.equal("NEWBODY");
-                    res.body[1].name.should.equal("NEWNAME");
-                    res.body[0].name.should.equal("insertedFromBeginning");
+                    res.body[0].body.should.equal("NEWBODY");
+                    res.body[0].name.should.equal("NEWNAME");
+                    res.body[1].name.should.equal("name specific id");
 
                     done();
                 });
