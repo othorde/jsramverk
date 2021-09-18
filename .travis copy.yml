@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+    - "node"
+    - "14"
+    - "12"
+    - "11"
+
+sudo: false
+
+git:
+    submodules: false
+
+before_script:
+    - npm install express --save
+    - npm install --save-dev nodemon
+    - npm install express cors morgan --save
+    - npm install mongodb --save
+    - npm install --save-dev mocha
+    - npm install --save-dev nyc
+    - npm install chai chai-http --save-dev
+
+script:
+    - npm test
+
+after_success:
+    - npm run report-coveralls
+    - npm run report-codecov
+
+ 
