@@ -10,12 +10,11 @@ let collectionName = "crowd";
 const database = {
     getDb: async function getDb () {
 
-        let dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`;
-        collectionName = "crowd"
 
-        if (process.env.NODE_ENV === "test") {
-            dsn = "mongodb://localhost:27017/mumin";
-            collectionName = "crowd";
+        let dsn = "mongodb://localhost:27017/mumin";
+
+        if (process.env.NODE_ENV !== "test") {
+            dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`;
         } 
 
         const client  = await mongo.connect(dsn, {
