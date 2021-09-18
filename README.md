@@ -1,3 +1,6 @@
+[![Build Status](https://app.travis-ci.com/othorde/jsramverk.svg?branch=main)](https://app.travis-ci.com/othorde/jsramverk)
+
+
 npm install express cors morgan --save
 npm install -g nodemon
 
