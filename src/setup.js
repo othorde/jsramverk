@@ -1,10 +1,12 @@
 /**
  * Connect to the database and setup it with some default data.
+ * Används enbart för att återställa db
  */
  "use strict";
 const database = require("../db/database.js");
 
 //const dsn =  process.env.DBWEBB_DSN || "mongodb://localhost:27017/mumin";
+
 
 
 const fs = require("fs");

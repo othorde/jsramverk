@@ -5,20 +5,21 @@ const database = require("../db/database.js");
 
 
 const find = {
-    findDocument: async function (critera, projection, limit) {
+    findDocument: async function (id, res) {
         let db;
 
         try {
 
             db = await database.getDb();
-            var id = "613786be89d20818d0b0726f";
-
-            res = await db.collection.find({"_id": ObjectId(id) }, projection).limit(limit).toArray();
-
-            if (res) {
-                return res;
+            idObj = ObjectId(id)
+            const result = await db.collection.find({ "_id": idObj }).toArray();
+            if (result !== undefined) {
+                return result;
             }
             } catch (e) {
+                if (e instanceof TypeError) {
+                    return "Id not found, maybe a typeError?"
+                }
                 return res.status(500).json({
                     errors: {
                         status: 500,

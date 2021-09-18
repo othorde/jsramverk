@@ -31,7 +31,7 @@ const findAll = {
 
 
             const res = await db.collection.find(criteria, projection).limit(limit).toArray();
-    
+            console.log(res)
             if (res) {
                 return res;
             }
@@ -45,7 +45,9 @@ const findAll = {
                 }
             });
         } finally {
+            
             await db.client.close();
+            
         }
     }
 

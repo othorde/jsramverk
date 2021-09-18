@@ -1,30 +1,67 @@
+"use strict";
+
+
 const mongo = require("mongodb").MongoClient;
 const config = require("./config.json");
-const collectionName = "crowd";
-
+//let collectionName = "crowd"
+let collectionName = "crowd";
 
 
 const database = {
     getDb: async function getDb () {
-        let dsn = process.env.DBWEBB_DSN || `mongodb+srv://${config.username}:${config.password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`;
-        
-        if (process.env.NODE_ENV === 'test') {
-            dsn = "mongodb://localhost:27017/test";
-        }
+
+        let dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`;
+        collectionName = "crowd"
+
+        if (process.env.NODE_ENV === "test") {
+            dsn = "mongodb://localhost:27017/mumin";
+            collectionName = "crowd";
+        } 
 
         const client  = await mongo.connect(dsn, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        const db = client.db();
-        const collection = db.collection(collectionName);
+        const db = await client.db();
+        const collection = await db.collection(collectionName);
 
         return {
-            dsn: dsn,
+            db: db,
             collection: collection,
             client: client,
         };
-    }
+    },
+
 };
 
 module.exports = database;
+  /*   resetDb: async function reset() {
+
+
+        const fs = require("fs");
+        const path = require("path");
+        const docs = JSON.parse(fs.readFileSync(
+            path.resolve(__dirname, "../src/setup.json"),
+            "utf8"
+        ));
+        
+        
+
+        // Do it.
+        resetCollection( "crowd", docs)
+            .catch(err => console.log(err));
+        
+
+        async function resetCollection(colName, doc) {
+
+            let db = await database.getDb();
+            let col = db.collection;
+            let client = db.client;
+
+            await col.deleteMany();
+            await col.insertMany(doc);
+
+            await client.close();
+        }
+        
+    } */

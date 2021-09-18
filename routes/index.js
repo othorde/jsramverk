@@ -7,11 +7,12 @@ const find = require("../src/find.js");
 
 
 router.get('/', function(req, res, next) {
-    const data = {
-        data: {
-            msg: "Hello INDEX"
-        }
-    };
+    const data = 
+        res.status(200).json({
+            data: {
+                msg: "Hello INDEX"
+            }
+        });
 
     res.json(data);
 });
@@ -23,25 +24,22 @@ router.get("/list", async (req, response, next) => {
         
     let res = await findAll.findAllDoc({}, {}, 0);
     
-    console.log(res);
     response.json(res);
 } catch (err) {
-    console.log(err);
     response.json(err);
 }
 });
 
+
 // Return a JSON object with list of all documents within the collection.
-router.get("/find", async (req, res, next) => {
+router.get("/lists/:id", async (req, response, next) => {
     try {
+    const id = req.params.id;
+    let res = await find.findDocument(id);
 
-    let res = await find.findDocument({}, {}, 0);
-
-    console.log(res);
     response.json(res);
+    console.log(res)
 } catch (err) {
-    console.log(err);
-    response.json(err);
     }
 });
 
@@ -52,16 +50,16 @@ router.post("/list", async (req, res, next) => {
     
     try {
         let result = await create.createDocument(req, res);
-        
-        res.status(201).json({
-            data: {
-                msg: "Got a POST request, sending back 201 Created"
-            }
-        });
 
+        if (result) {
+            res.status(201).json({
+                data: {
+                    msg: "Got a POST request, sending back 201 Created"
+                }
+            });
+        }
     } catch (err) {
-        console.log(err);
-        response.json(err);
+            response.json(err);
         }
     });
     
@@ -70,12 +68,12 @@ router.post("/list", async (req, res, next) => {
 /* UPDATE */
 router.put("/list", async (req, res) => {
     try {
-    result = await update.updateDocument(req, {});
-    res.status(204).send();
+    
+    let result = await update.updateDocument(req, res);
+    return (result);
 
 } catch (err) {
-    console.log(err);
-    response.json(err);
+    res.json(err);
 }
 });
 

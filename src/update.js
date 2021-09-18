@@ -12,27 +12,32 @@ const update = {
     updateDocument: async function (req, res) {
         // req contains user object set in checkToken middleware
         let db;
-        console.log('Got name:', req.body);
+
+        console.log("härrrrrrrrrrrrrrrr", req.body)
 
         try {
+            if (req.body._id !== String ) {
+                return "false";
+            }
+
             db = await database.getDb();
             var id = req.body._id;
             const filter = { "_id": ObjectId(id) };
-            //res = await db.collection.find({"_id": ObjectId(id) }, projection).limit(limit).toArray();
 
             const updateDocument = {
                 $set: {
-                    name: req.body.name,
                     body: req.body.body
                 },
             };
 
-            const res = await db.collection.updateOne(
+            const result = await db.collection.updateOne(
                 filter,
                 updateDocument,
             );
-            if (res) {
-                return res;
+            if (result.acknowledged) {
+                return true
+            } else {
+                return false
             }
         } catch (e) {
             return res.status(500).json({
