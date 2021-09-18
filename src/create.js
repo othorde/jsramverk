@@ -20,8 +20,6 @@ const create = {
             };
 
             if (req.body._id) {
-                console.log("ID INSKICKAAAAAAAAAAAAT", req.body._id)
-
                 doc = { /* uppbyggnad av dokumentet */
                     _id: req.body._id,
                     name: req.body.name, //body.name,

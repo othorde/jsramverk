@@ -72,7 +72,7 @@ describe('database', () => {
          
 
             let body = {
-                _id: "101010101010101010101010",
+                _id: "1010",
                 name: "name specific id",
                 body: "body specific id",
 
@@ -125,13 +125,15 @@ describe('database', () => {
     });
 
     
-    describe('GET /lists/101010101010101010101010', () => {
-        it('// Return a JSON object with list of all documents', (done) => {
-            chai.request(server)
-                .get("/lists/101010101010101010101010")
-                .end((err, res) => {
-                    console.log("hääääääär", res.body)
+    describe('GET /lists/1010', () => {
+        it('// Returns one doc', (done) => {
 
+        chai.request(server)
+                .get("/lists/1010")
+                .end((err, res) => {
+                    res.body[0]._id.should.equal("1010")
+                    res.body[0].body.should.equal("body specific id")
+                    res.body[0].name.should.equal("name specific id")    
                     done();
                 });
         });

@@ -27,11 +27,8 @@ const findAll = {
         try {
             db = await database.getDb();
 
-            //db.theColl.find( { "_id": ObjectId("4ecbe7f9e8c1c9092c000027") } )
-
-
             const res = await db.collection.find(criteria, projection).limit(limit).toArray();
-            console.log(res)
+
             if (res) {
                 return res;
             }
