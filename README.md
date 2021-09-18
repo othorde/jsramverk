@@ -1,6 +1,4 @@
-[![Build Status](https://app.travis-ci.com/othorde/jsramverk.svg?branch=main)](https://app.travis-ci.com/othorde/jsramverk)
-
-
+[![Build Status](https://app.travis-ci.com/othorde/jsramverk.svg?branch=backend)](https://app.travis-ci.com/othorde/jsramverk)
 
     - npm install
     -------------------------------
