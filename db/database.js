@@ -2,9 +2,15 @@
 
 
 const mongo = require("mongodb").MongoClient;
-const config = require("./config.json");
-//let collectionName = "crowd"
 let collectionName = "crowd";
+let config;
+/* const config = require("./config.json");
+ */
+try {
+    config = require("./config.json");
+} catch (error) {
+    console.log(error)
+}
 
 
 const database = {
@@ -14,6 +20,7 @@ const database = {
         let dsn = "mongodb://localhost:27017/mumin";
 
         if (process.env.NODE_ENV !== "test") {
+
             dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`;
         } 
 
