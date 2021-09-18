@@ -7,13 +7,7 @@ node_js:
 services: mongodb
 
 before_script:
-    - npm install express --save
-    - npm install --save-dev nodemon
-    - npm install express cors morgan --save
-    - npm install mongodb --save
-    - npm install --save-dev mocha
-    - npm install --save-dev nyc
-    - npm install chai chai-http --save-dev
+    - npm install 
 
 script:
     - npm test

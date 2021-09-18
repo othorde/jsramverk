@@ -1,8 +1,17 @@
 [![Build Status](https://app.travis-ci.com/othorde/jsramverk.svg?branch=main)](https://app.travis-ci.com/othorde/jsramverk)
 
 
-npm install express cors morgan --save
-npm install -g nodemon
+
+    - npm install
+    -------------------------------
+        - express --save
+        - --save-dev nodemon
+        - express cors morgan --save
+        - mongodb --save
+        - --save-dev mocha
+        - --save-dev nyc
+        - chai chai-http --save-dev
+    --------------------------------
 
 
 kör npm start om du lagt till scriptet:    
