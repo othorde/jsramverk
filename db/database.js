@@ -4,24 +4,27 @@
 const mongo = require("mongodb").MongoClient;
 let collectionName = "crowd";
 let config;
-/* const config = require("./config.json");
- */
+let password;
+let username;
+
 try {
     config = require("./config.json");
 } catch (error) {
     console.log(error)
 }
 
+username =  config.username || process.env.USERNAME;
+password =  config.password || process.env.PASSWORD;
 
 const database = {
     getDb: async function getDb () {
 
+        let dsn = `mongodb+srv://${username}:${password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`;
 
-        let dsn = "mongodb://localhost:27017/mumin";
 
-        if (process.env.NODE_ENV !== "test") {
+        if (process.env.NODE_ENV === "test") {
+            dsn = "mongodb://localhost:27017/mumin";
 
-            dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`;
         } 
 
         const client  = await mongo.connect(dsn, {
