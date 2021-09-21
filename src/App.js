@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Home from "./components/Home";
 import Form from "./components/Form";
 
 

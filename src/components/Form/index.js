@@ -17,7 +17,7 @@ const Form = (setFormCreate) => {
     const onSubmit = data => handleInput(data); // klar
     const onChange = data => handleInput(data); // klar
 
-    const [whatDocument, setWhatDocument] = useState(''); 
+    const [whatDocument, setWhatDocument] = useState(null); 
     const [theDocument, setTheDocument] = useState(''); 
 
     const handleInput = async (data) => {
@@ -30,7 +30,6 @@ const Form = (setFormCreate) => {
 
             /* jag vill att whatDokument ska hämta ett nytt dokument baseras på datan som skickas in genom handleInput alltså vilket ID */
             let res = await apisetting.getSpecificDocument(whatDocument)
-            
             setTheDocument([res[0].body, res[0].name, res[0]._id])
 
           }
@@ -46,25 +45,18 @@ const Form = (setFormCreate) => {
                 whatDocument={theDocument}
             />
             <fieldset>
-                    <label>
-                        <p>Välj en fil att uppdatera</p>
-                        <select name="sss" onChange={(e) => {
+                    <label >Välj en fil att uppdatera </label>
+                        <select name="sss" data-testid="dropdown" onChange={(e) => {
+                        
 
                         handleSubmit(onChange(e.target.value))
+                        
                         }}>
                         <option value={''}>-- Eller välj en fil att uppdatera --</option>
                         {state.oneDocument.map(item => (<option key={item._id} value={[item._id]} >{item.name}</option>))}
-
+                        
                             </select>
-                        </label>
                 </fieldset>
-
-     {/*        <form onSubmit={handleSubmit(onSubmit)}>
-                <fieldset>
-                <input defaultValue="" {...register("docName")} />
-                    <input type = "submit"/>
-                </fieldset>
-                </form> */}
             </Content>
         </Wrapper>
         )        

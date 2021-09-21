@@ -3,16 +3,12 @@ import React, {useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
 //styles
 import { Wrapper, Content } from './Form.styles.js'
-import { useDocumentFetch } from '../../hooks/useDocumentFetch'
 
 //other
 import apisetting from "../../API.js";
 
 
 const FormCreate = (editorContent) => {
-
-    
-    
     
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => handleInput(data); // klar
@@ -20,28 +16,26 @@ const FormCreate = (editorContent) => {
 
     const [state, setState] = useState(editorContent); 
     const handleInput = async (data) => {
-
         const body = editorContent.editorContent[0]
         const id = editorContent.editorContent[1]
             alert("Dokument skapat");
             let res = await apisetting.createOneDocument(data.docName, body)
+
     }
-
-    const handleUpdate= async () => {
-
+    
+    const handleUpdate = async () => {
+        //const editorContent = await getBodyAndId()
         const body = editorContent.editorContent[0];
         const id = editorContent.editorContent[1];
+        console.log("body" ,body, "id" ,id)
+
         let res = await apisetting.updateOneDocument(id, body)
-
+        if(res) {
+            alert("Uppdaterat")
+        }
         return res;
-
+        
     }
-
-
-
-
-
-    
 
     useEffect(() => {
 
@@ -60,20 +54,21 @@ const FormCreate = (editorContent) => {
     return (
         <Wrapper>
             <Content>
-
-            <form onSubmit={handleSubmit(onSubmit)}>
-
+            
+            <form testid="createtest" onSubmit={handleSubmit(onSubmit)}>
                 <fieldset>
-                <p>Döp filen och spara</p>
+                <label>Döp filen och spara</label>
                 <input type = "submit" value= "Spara som"/>
                 <input defaultValue="" {...register("docName")} />
                 </fieldset>
                 </form>
-
-                <form onSubmit={handleSubmit(handleUpdate)}>
+                <form onSubmit={handleSubmit(handleUpdate)} testid="formtest">
                 <fieldset>
-                <p>Uppdatera</p>
-                <input type = "submit" value= "Uppdatera" {...register("uppdatera")}/>
+                <label>Update</label>
+                <input 
+                    type = "submit" 
+                    value= "Uppdatera" {...register("uppdatera")}
+                />
                 </fieldset>
                 </form>
 

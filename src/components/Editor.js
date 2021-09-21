@@ -25,9 +25,8 @@ const Editor = (theDocument) => {
 
     return (
     <>
-    {/* KANSKE MÅSTE HA DIVS HÄR */}
-    <h2> {doc[1]}</h2>
-    <CKEditor
+    <h2 data-testid="header"> {doc[1]} </h2>
+    <CKEditor data-testid="editor"
         editor={ ClassicEditor }
         data={ doc[0] }
         onReady={ editor => {

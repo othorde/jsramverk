@@ -49,6 +49,8 @@ const apisetting = {
 
 	updateOneDocument: async (id, body1) => {
 		const endpoint = `${API_URL}`
+		console.log("IDBODY",id,body1 )
+
 		const document = await (
 			await fetch(endpoint, {
 			  ...defaultConfigPut,
@@ -59,5 +61,7 @@ const apisetting = {
 		return document;
 	},
 };
+
+
 
 export default apisetting

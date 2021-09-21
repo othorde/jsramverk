@@ -15,7 +15,6 @@ export const useDocumentFetch = () => {
     const [error, setError] = useState(false);
     const [formCreate, setFormCreate] = useState('');
     const [getDataFromEditor, setDataFromEditor] = useState('');
-    console.log("bajs", getDataFromEditor)
 
     const fetchDocuments = async() => {
         try {
