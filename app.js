@@ -1,20 +1,40 @@
-
 const express = require("express");
 const morgan = require('morgan');
 const cors = require('cors');
-
 const bodyParser = require('body-parser');
 const app = express();
+const httpServer = require('http').createServer(app);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const index = require('./routes/index');
-
 const port = process.env.PORT || 1337;
 
 
+const io = require("socket.io")(httpServer, {
+    cors: {
+      origin: "http://www.student.bth.se",
+      methods: ["GET", "POST"]
+    }
+});
+
+
+let previousId;
+io.sockets.on('connection', function(socket) {
+    socket.on('create', function(room) {
+        socket.leave(previousId);
+        socket.join(room);
+        previousId = room;
+        socket.on('changes', data => {
+        socket.to(room).emit("receive-changes", data);
+            // Spara till databas och göra annat med data
+        });
+    });
+});
+
+
+
 app.use(cors());
-
-
 
 // don't show the log when it is test
 if (process.env.NODE_ENV !== 'test') {
@@ -64,5 +84,5 @@ app.use((err, req, res, next) => {
 
 
 // Start up server
-const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+const server = httpServer.listen(port, () => console.log(`Example app listening on port ${port}!`));
 module.exports = server;
