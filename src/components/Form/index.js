@@ -14,7 +14,6 @@ const Form = (setFormCreate) => {
 
     const {state, getDataFromEditor} = useDocumentFetch(); /* hämtar  */
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => handleInput(data); // klar
     const onChange = data => handleInput(data); // klar
 
     const [whatDocument, setWhatDocument] = useState(null); 
@@ -34,8 +33,6 @@ const Form = (setFormCreate) => {
 
           }
           fetchDocument()
-           /* jag vill att whatDokument ska hämta ett nytt dokument baseras på datan som skickas in genom handleInput alltså vilket ID */
-
         }, [setWhatDocument, whatDocument])
 
     return (
