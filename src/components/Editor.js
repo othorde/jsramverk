@@ -9,18 +9,16 @@ import socketIOClient from "socket.io-client";
 
 //Components
 
-
 const Editor = (theDocument) => {
-    //const {setDataFromEditor} = useDocumentFetch(); /* hämtar  */
     let doc = theDocument.whatDocument;
     const [editorContent, setEditorContent] = useState('');
     const [socket, setSocket] = useState('');
     const [docc, setDocc] = useState("");
-    const [editorr, setEditorr] = useState("");
+    const [editorState, setEditorState] = useState("");
 
     useEffect(() => {
-       
         const ENDPOINT = "https://jsramverk-editor-olto20.azurewebsites.net/";
+        //const ENDPOINT = "localhost:1337";
         const s = socketIOClient(ENDPOINT);
         setDocc(doc)
         setSocket(s)
@@ -31,7 +29,7 @@ const Editor = (theDocument) => {
     }, [doc[1]])
 
     useEffect(() => {
-        if (editorContent == "") return
+        if (editorContent === "") return
         socket.emit("create", docc[2]); // innebär att vi joinar alltid rum, om vi är i samma doc
         socket.emit("changes", editorContent) // från klient till server
 
@@ -39,8 +37,8 @@ const Editor = (theDocument) => {
     
 
 
-    useEffect(()   =>  {
-        if (editorContent == "") return
+    useEffect(() => {
+        if (editorContent === "") return
         const handler = (data) => {
             let newData = [];
             newData[0] = data[0]; //ny body
@@ -55,26 +53,37 @@ const Editor = (theDocument) => {
         }
     }, [editorContent])
 
-//<div class="ck-blurred ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline" lang="en" dir="ltr" role="textbox" aria-label="Rich Text Editor, main" contenteditable="true"><p><br data-cke-filler="true"></p></div>
 
+    const handleClick = async() => {
+        if (editorState !== undefined) {
+            setEditorContent([editorState.getData(), doc[2], doc[3]])
+        }
+    }
+
+    useEffect(() => {
+        }, [setEditorState])
+    
+  
     return (
     <>
     <h2 data-testid="header"> {docc[1]} </h2>
-    <CKEditor data-testid="editor" 
+
+    <div onKeyUp={(e) => { handleClick() }}> 
+          
+        <CKEditor data-testid="editor"  
+        class="editor"
         editor={  ClassicEditor }
         data={docc[0]}
         onReady={ editor => {
-            setEditorr(editor)
+            setEditorState(editor)
         } }
-        onChange={ ( event, editor ) => {
-            setEditorContent([editor.getData(), doc[2]])
-        } }
-        onBlur={ ( event, editor ) => {
-        } }
-        onFocus={ ( event, editor ) => {
-        } }
-        
-    />
+      /*   onChange={ ( event, editor ) => {
+            setEditorContent([editor.getData(), doc[2], doc[3]])
+        } } */
+  
+        //onKeyUp={(e) => this.inputChange('name', e.target.value)}
+    /> </div>
+
     <FormCreate editorContent={editorContent}/>
     </>
     )

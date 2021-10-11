@@ -9,11 +9,7 @@ export const Wrapper = styled.div `
 
 export const Content = styled.div `
     margin: 20px 0;
-    max-width: 80%;
+    width: 500px;
     float: left;
-    padding-left: 50px;
-    padding-top: 20px;
-    
 
 `;
-

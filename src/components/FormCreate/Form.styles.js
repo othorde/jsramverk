@@ -11,5 +11,13 @@ export const Content = styled.div `
     margin: 20px 0;
     width: 500px;
     float: left;
+    
+    .spara{
+      .input {
+            max-width: 10px;
+            width: 10px;
+        }
+    };
 
+   
 `;

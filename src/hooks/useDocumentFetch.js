@@ -2,13 +2,20 @@ import { useState, useEffect} from 'react';
 
 import apisetting from "../API";
 
+
 const initialState = {
     page: 0,
     oneDocument: []
 
 };
 
+
+
+
 export const useDocumentFetch = () => {
+
+
+
 
     const [state, setState] = useState(initialState); /* dekonstruera state */
     const [loading, setLoading] = useState(false);
@@ -20,7 +27,6 @@ export const useDocumentFetch = () => {
         try {
             setError(false);
             setLoading(true);
-            
             const documents = {
                 oneDocument: await apisetting.getAllDocuments()
             }
