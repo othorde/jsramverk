@@ -3,38 +3,35 @@
  */
  "use strict";
 const database = require("../db/database.js");
-var express = require('express');
-var ObjectId = require('mongodb').ObjectId; 
-
+const mailAvaliable = require("./mailavaliable");
+const auth = require("./auth");
 
 const create = {
-    createDocument: async function (req, res) {
-        let doc;
+    createUser: async function (req, res) {
+        let user;
         let db;
+        let salt = 10;
+        let hashed;
+        let isAvaliable;
         try {
-            db = await database.getDb(); 
-            
-            doc = { /* uppbyggnad av dokumentet */
-                name: req.body.name, //body.name,
-                body: req.body.body, //body.text
-            };
-
-            if (req.body._id) {
-                doc = { /* uppbyggnad av dokumentet */
-                    _id: req.body._id,
-                    name: req.body.name, //body.name,
-                    body: req.body.body, //body.text
-                };
-            } 
-
-          
-            if (doc.name !== undefined) {
-                const res = await db.collection.insertOne(doc);
-                return true
+            user = req.body;
+            db = await database.getDb();
+            hashed = await auth.hash(user.psw, salt)
+            isAvaliable = await mailAvaliable.isMailAvaliable(req.body.email)
+           
+            if (isAvaliable == true && hashed) {
+                user.psw = hashed;
+                let result = await db.collection.insertOne(user);
+                if (result) {
+                    return true
+                } else {
+                    return false
+                }
             } else {
                 return false
             }
-            } catch (e) {
+
+        } catch (e) {
                 return res.status(500).json({
                     errors: {
                         status: 500,

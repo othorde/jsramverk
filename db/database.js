@@ -1,22 +1,16 @@
 "use strict";
 
-
 const mongo = require("mongodb").MongoClient;
 let collectionName = "crowd";
 let config;
 let password;
 let username;
 
-
-
-
-
 const database = {
     getDb: async function getDb () {
 
-        let dsn = "mongodb://localhost:27017/mumin";
-
-
+        //let dsn = "mongodb://localhost:27017/mumin";
+        let dsn;
         if (process.env.NODE_ENV !== "test") {
 
             try {
@@ -26,9 +20,7 @@ const database = {
             }
             username =  config.username || process.env.USERNAME;
             password =  config.password || process.env.PASSWORD;
-
             dsn = `mongodb+srv://${username}:${password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`;
-
         } 
 
         const client  = await mongo.connect(dsn, {
@@ -48,33 +40,4 @@ const database = {
 };
 
 module.exports = database;
-  /*   resetDb: async function reset() {
 
-
-        const fs = require("fs");
-        const path = require("path");
-        const docs = JSON.parse(fs.readFileSync(
-            path.resolve(__dirname, "../src/setup.json"),
-            "utf8"
-        ));
-        
-        
-
-        // Do it.
-        resetCollection( "crowd", docs)
-            .catch(err => console.log(err));
-        
-
-        async function resetCollection(colName, doc) {
-
-            let db = await database.getDb();
-            let col = db.collection;
-            let client = db.client;
-
-            await col.deleteMany();
-            await col.insertMany(doc);
-
-            await client.close();
-        }
-        
-    } */

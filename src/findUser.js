@@ -1,39 +1,33 @@
 var ObjectId = require('mongodb').ObjectId; 
 const database = require("../db/database.js");
+const auth = require("./auth");
 
 "use strict";
 
 
-const find = {
-    findDocument: async function (id, res) {
+const findUser = {
+    findUser: async function (req, res) {
         let db;
+        let checkAuth;
 
         try {
+            
             db = await database.getDb();
-            /* endast för test */
-            /*
-            let idObj
-             
-            if (id == "1010") { 
-                idObj = "1010"
+            const result = await db.collection.findOne({"email": req.body.email})
+            if (result == null) {
+                return false;
             } else {
-                idObj = ObjectId(id)
-            }
-            */
-   
-            const result = await db.collection.aggregate([
-            {$match: {'docs.docid': {$in : [id] } }},
-            {$project: {
-                docs: {$filter: {
-                    input: '$docs',
-                    as: 'docid',
-                    cond: {$in: ['$$docid.docid', [id]]}
-                }}
-            }}
-            ]).toArray();
 
-            if (result !== undefined) {
-                return result;
+                let correctPsw = await auth.unhash(result.psw, req.body.psw);
+                if (correctPsw) {
+
+                    const token = await auth.token(req)
+                    const res = {
+                        token: token,
+                        validate: true
+                    }
+                    return res
+                }              
             }
             } catch (e) {
                 if (e instanceof TypeError) {
@@ -53,4 +47,4 @@ const find = {
         }
     }
 
-module.exports = find;
+module.exports = findUser;

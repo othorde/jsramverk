@@ -42,9 +42,7 @@ async function resetCollection(colName, doc) {
     let db = await database.getDb();
     let col = db.collection;
     let client = db.client;
-/*     const client  = await mongo.connect(dsn);
-    const db = await client.db();
-    const col = await db.collection(colName); */
+
 
     await col.deleteMany();
     await col.insertMany(doc);

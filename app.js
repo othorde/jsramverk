@@ -10,11 +10,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const index = require('./routes/index');
 const port = process.env.PORT || 1337;
 
-
+//origin: "http://localhost:3000",
 const io = require("socket.io")(httpServer, {
     cors: {
-      origin: "http://www.student.bth.se",
-      methods: ["GET", "POST"]
+        origin: "https://www.student.bth.se",
+        methods: ["GET", "POST"]
     }
 });
 
@@ -27,11 +27,9 @@ io.sockets.on('connection', function(socket) {
         previousId = room;
         socket.on('changes', data => {
         socket.to(room).emit("receive-changes", data);
-            // Spara till databas och göra annat med data
         });
     });
 });
-
 
 
 app.use(cors());
@@ -53,8 +51,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/', index);
-
-
 
 // Add routes for 404 and error handling
 // Catch 404 and forward to error handler

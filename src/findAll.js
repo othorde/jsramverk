@@ -1,5 +1,5 @@
 const database = require("../db/database.js");
-var ObjectId = require('mongodb').ObjectId; 
+const auth = require("./auth.js");
 
  "use strict";
 
@@ -22,13 +22,12 @@ var ObjectId = require('mongodb').ObjectId;
 const findAll = {
 
     findAllDoc: async function (criteria, projection, limit) {
-
         let db;
         try {
+
             db = await database.getDb();
-
             const res = await db.collection.find(criteria, projection).limit(limit).toArray();
-
+         
             if (res) {
                 return res;
             }
@@ -46,7 +45,9 @@ const findAll = {
             await db.client.close();
             
         }
-    }
+    },
+
+ 
 
 }
 
