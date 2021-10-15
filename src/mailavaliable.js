@@ -1,4 +1,3 @@
-var ObjectId = require('mongodb').ObjectId; 
 const database = require("../db/database.js");
 
 "use strict";

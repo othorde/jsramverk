@@ -4,13 +4,30 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 const httpServer = require('http').createServer(app);
+const { graphqlHTTP } = require('express-graphql');
+const {
+    GraphQLSchema
+} = require("graphql");
+
+// GraphQL
+const visual = true;
+const RootQueryType = require("./src/graphQl/root.js");
+
+const schema = new GraphQLSchema({
+    query: RootQueryType
+});
+
+
+
+// GraphQL
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const index = require('./routes/index');
 const port = process.env.PORT || 1337;
 
-//origin: "http://localhost:3000",
+// origin: "https://www.student.bth.se",
+// origin: "http://localhost:3000",
 const io = require("socket.io")(httpServer, {
     cors: {
         origin: "https://www.student.bth.se",
@@ -42,6 +59,9 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(express.json());
 
 
+
+
+
 // This is middleware called for all routes.
 // Middleware takes three parameters.
 app.use((req, res, next) => {
@@ -49,6 +69,11 @@ app.use((req, res, next) => {
     console.log(req.path);
     next();
 });
+
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    graphiql: visual, // Visual är satt till true under utveckling
+}));
 
 app.use('/', index);
 

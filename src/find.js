@@ -9,18 +9,7 @@ const find = {
         let db;
 
         try {
-            db = await database.getDb();
-            /* endast för test */
-            /*
-            let idObj
-             
-            if (id == "1010") { 
-                idObj = "1010"
-            } else {
-                idObj = ObjectId(id)
-            }
-            */
-   
+            db = await database.getDb();   
             const result = await db.collection.aggregate([
             {$match: {'docs.docid': {$in : [id] } }},
             {$project: {
@@ -31,7 +20,7 @@ const find = {
                 }}
             }}
             ]).toArray();
-
+            console.log(result)
             if (result !== undefined) {
                 return result;
             }
