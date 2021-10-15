@@ -72,7 +72,7 @@ app.use((req, res, next) => {
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,
-    graphiql: visual, // Visual är satt till true under utveckling
+    graphiql: false, // Visual är satt till true under utveckling
 }));
 
 app.use('/', index);
