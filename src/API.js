@@ -1,4 +1,4 @@
-import { API_URL, API_URL_LOGIN, API_PUT_DOC, API_URL_AUTHFORUSER } from "./config";
+import { API_URL, API_URL_LOGIN, API_PUT_DOC, API_URL_AUTHFORUSER, API_URL_GRAPHQL } from "./config";
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -10,7 +10,54 @@ const defaultConfig = {
 	},
 };
 
+const defaultConfig2 = {
+	method: 'POST',
+	headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+
+	},
+};
+
+let query = `query doc($docid: "12343") {
+	docname 
+	text
+  }`;
+
+
 const apisetting = {
+	getByGraphQl: async (query) => {
+
+		const endpoint = `${API_URL_GRAPHQL}`
+		const documents = await (
+			await fetch(endpoint, {
+				...defaultConfig2,
+				body: JSON.stringify({ 
+					query: query,
+				}) 
+			})
+		  ).json();
+		return documents;
+	},
+
+/* s */
+/* 	body: JSON.stringify( { query: "{ users { name } }" } )
+ */
+
+/* 	getByGraphQl: async (query1) => {
+		await fetch('http://localhost:1337/graphql', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json',
+				"Access-Control-Allow-Origin": "*"
+			},
+			body: JSON.stringify({ query: "{ users { name } }" })
+		})
+			.then(r => r.json())
+			.then(data => console.log('data returned:', data));
+
+	}, */
 
 	getAllDocuments: async () => {
 		const endpoint = `${API_URL}`

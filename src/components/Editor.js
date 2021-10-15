@@ -18,7 +18,10 @@ const Editor = (theDocument) => {
 
     useEffect(() => {
         const ENDPOINT = "https://jsramverk-editor-olto20.azurewebsites.net/";
-        //const ENDPOINT = "localhost:1337";
+
+        if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "") {
+            const ENDPOINT = "localhost:1337";
+        }
         const s = socketIOClient(ENDPOINT);
         setDocc(doc)
         setSocket(s)

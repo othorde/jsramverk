@@ -34,10 +34,23 @@ const Form = () => {
     useEffect(() => {
         const fetchDocument = async () => {
             if (whatDocument) {
-                let res = await apisetting.getSpecificDocument(whatDocument)
+                var query = `query 
+                    { doc(docid: \"${whatDocument}\" ) 
+                    { 
+                        docname
+                        text
+                        allowed_user
+                        
+                    } 
+                }`
+                let res = await apisetting.getByGraphQl(query)
                 if (res.length !== 0) {
-                    setTheDocument([res[0].docs[0].text, res[0].docs[0].docname,
-                        res[0].docs[0].docid, res[0].docs[0].allowed_user])
+                    setTheDocument([
+                        res.data.doc.text, 
+                        res.data.doc.docname,
+                        whatDocument, 
+                        res.data.doc.allowed_user
+                    ])
                 }
             }
           }

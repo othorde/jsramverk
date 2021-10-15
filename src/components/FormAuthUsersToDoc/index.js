@@ -46,20 +46,20 @@ const FormAuthUsersToDoc = (whatDocument) => {
     }
  
     const fetchDocuments = async() => {
+        let query = "{ users { email _id  } }";
         try {
-
-            const allDocuments = {
-                oneDocument: await apisetting.getAllDocuments()
+            let res = await apisetting.getByGraphQl(query)
+            const allDocuments = {             
+                oneDocument: res.data.users
             }
 
+            console.log(allDocuments.oneDocument)
+            
             setState(prev => ({
                 ...allDocuments,
                 oneDocument:
                 [...allDocuments.oneDocument]
-                
             }));
-
-
         } catch (error) {
             console.log(error);
         }
@@ -70,31 +70,30 @@ const FormAuthUsersToDoc = (whatDocument) => {
         fetchDocuments();
     }, [])
 
+    return (
+    <Wrapper>
+        <Content>
+        <fieldset className = "register">
+            <label> Välj användare som du vill dela dokumentets rättigheter med </label>
+                <select name="bbb" data-testid="dropdown2" onChange={(e) => {
+                handleSubmit(onChange(e.target.value))
+                }}>
+                    <option value={''}>-- Välj användare --</option>
+                    {state.oneDocument.map(item => item.docs !== null ? 
+                        <option 
+                            key={item._id+1} 
+                            value={[item.email]}>
+                            {item.email}
+                        </option>: console.log("hej"))}
+                </select>
 
-        return (
-        <Wrapper>
-            <Content>
-            <fieldset className = "register">
-                <label> Välj användare som du vill dela dokumentets rättigheter med </label>
-                    <select name="bbb" data-testid="dropdown2" onChange={(e) => {
-                    handleSubmit(onChange(e.target.value))
-                    }}>
-                        <option value={''}>-- Välj användare --</option>
-                        {state.oneDocument.map(item => item.docs !== null ? 
-                            <option 
-                                key={item._id+1} 
-                                value={[item.email]}>
-                                {item.email}
-                            </option>: console.log("hej"))}
-                    </select>
-
-                    <button onClick={onSubmits}>
-                    Dela
-                    </button>
-                </fieldset> 
-            </Content>
-        </Wrapper>
-        )    
+                <button onClick={onSubmits}>
+                Dela
+                </button>
+            </fieldset> 
+        </Content>
+    </Wrapper>
+    )    
 
 }
 export default FormAuthUsersToDoc
