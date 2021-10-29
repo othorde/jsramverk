@@ -20,7 +20,7 @@ describe('#update document()', async function() {
 
         let foundDoc = await find.findDocument("123123");
         let newtext = foundDoc[0].docs[0].text;
-
+        console.log(newtext)
         assert.equal(updatedDoc, true)
         assert.equal(newtext, "Ny text")
 
