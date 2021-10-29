@@ -8,7 +8,6 @@ const database = require("../db/database.js");
 
 beforeEach(async function() {
     
-  await database.resetDb() // denna stänger också db
 
 let db;
   db = await database.getDb(); 
@@ -20,6 +19,9 @@ let db;
   await db.client.close();
 });
 
+afterEach(async function() {
+  await database.resetDb() // denna stänger också db
+});
 
 
 describe('#hash()', function() {

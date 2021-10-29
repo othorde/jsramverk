@@ -22,7 +22,6 @@ describe('#create()', function() {
 		assert.equal(user, true);
     });
 	it('Trying to create a new user with same Email, should return false', async function(){
-		await database.resetDb() // denna stänger också db
 
 		var user = await create.createUser(req = {
 			body: {
@@ -32,7 +31,7 @@ describe('#create()', function() {
 			}
 		});
 		assert.equal(user, true)
-		var user = await create.createUser(req = {
+		var user1 = await create.createUser(req = {
 			body: {
 				user:'NyAnvändare',
 				psw: "12345",
