@@ -1,9 +1,4 @@
-var ObjectId = require('mongodb').ObjectId; 
 const database = require("../db/database.js");
-const auth = require("./auth");
-
-"use strict";
-
 
 const findUser = {
     findUser: async function (req, res) {
@@ -14,20 +9,11 @@ const findUser = {
             
             db = await database.getDb();
             const result = await db.collection.findOne({"email": req.body.email})
+
             if (result == null) {
                 return false;
             } else {
-
-                let correctPsw = await auth.unhash(result.psw, req.body.psw);
-                if (correctPsw) {
-
-                    const token = await auth.token(req)
-                    const res = {
-                        token: token,
-                        validate: true
-                    }
-                    return res
-                }              
+                return result         
             }
             } catch (e) {
                 if (e instanceof TypeError) {

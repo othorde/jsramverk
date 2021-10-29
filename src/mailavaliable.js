@@ -10,7 +10,7 @@ const mailAvaliable = {
 
             db = await database.getDb(); 
             let result = await db.collection.find({"email": email}).toArray();
-            if (result.length === 0) { /* om result är empty */
+            if (result.length === 0) {
                 return true
             } else {
                 return false

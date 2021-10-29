@@ -7,8 +7,10 @@ const find = require("../src/find.js");
 const findUser = require("../src/findUser.js");
 const auth = require("../src/auth.js");
 const findAuthDoc = require('../src/findAuthDoc.js');
+const invite = require('../src/invite.js');
 
 router.get('/', function(req, res, next) {
+
     const data = 
         res.status(200).json({
             data: {
@@ -18,6 +20,7 @@ router.get('/', function(req, res, next) {
 
     res.json(data);
 });
+
 
 // Return a JSON object with list of all documents within the collection.
 router.get("/list", async (req, response, next) => {
@@ -64,7 +67,32 @@ router.post("/list", async (req, res, next) => {
             res.json(err);
         }
     });
+
+/* Invite */
+router.post("/invite", async (req, res, next) => {
     
+    try {
+        await auth.checkToken(req, res, next);
+        
+        let result = await invite.sendInvite(req, res);
+        if (result === true) {
+            res.status(202).json({
+                data: {
+                    mail: "Accepted"
+                }
+            });
+        } else if (result === false) {
+            res.status(401).json({
+                data: {
+                    msg: false
+                }
+            });
+        }
+    } catch (err) {
+            res.json(err);
+        }
+    });
+
 /* UPDATE */
 router.put("/list", async (req, res, next) => {
 
@@ -87,23 +115,24 @@ router.put("/list", async (req, res, next) => {
     } catch (err) {
         res.json(err);
     }
-
 });
 
 //checklogin
-router.post("/login", async (req, res, next) => {
+router.post("/login", async (req, res) => {
 
     try {
         let result = await findUser.findUser(req, res);
-        if (result.validate === true) {
+        let correctPsw = await auth.unhash(result.psw, req.body.psw);
 
+        if (correctPsw) {
+            const token = await auth.token(req)
+        
             res.status(201).json({
                 data: {
                     msg: true,
-                    token: result.token
+                    token: token
                 }
             });
-            
         } else {
             res.status(401).json({
                 data: {
@@ -119,7 +148,6 @@ router.post("/login", async (req, res, next) => {
 /* hämtar alla dokument som använadre har tillgång till */
 router.post("/doc", async (req, res, next) => {
     try {
-
         let result = await findAuthDoc.findAuthDocs(req, res);
         res.json(result);
         return result

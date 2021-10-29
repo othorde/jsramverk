@@ -21,7 +21,11 @@ const database = {
             username =  config.username || process.env.USERNAME;
             password =  config.password || process.env.PASSWORD;
             dsn = `mongodb+srv://${username}:${password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`;
-        } 
+        } else {
+            username =  "texteditor";
+            password =  "hejhej";
+            dsn = `mongodb+srv://${username}:${password}@cluster0.gywby.mongodb.net/test?retryWrites=true&w=majority`
+        }
 
         const client  = await mongo.connect(dsn, {
             useNewUrlParser: true,
@@ -36,6 +40,17 @@ const database = {
             client: client,
         };
     },
+
+    resetDb: async function() {
+        if (process.env.NODE_ENV === "test") {
+
+            var db = await this.getDb()
+            await db.collection.deleteMany({})
+            await db.client.close();   
+
+        }
+
+    }
 
 };
 

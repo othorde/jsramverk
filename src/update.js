@@ -1,11 +1,6 @@
-/**
- * Connect to the database and setup it with some default data.
- */
+
  "use strict";
-const ObjectId = require('mongodb').ObjectId; 
 const database = require("../db/database.js");
-
-
 
 const update = {
     
@@ -13,21 +8,14 @@ const update = {
         // req contains user object set in checkToken middleware
         let db;
         try {
-            /* if (req.body._id !== String ) {
-                console.log("updateDocumentafterIF", req.body)
-
-                return "false";
-            } */
 
             db = await database.getDb();
             var id = req.body._id;
-            /* ändra $ vid fler dokument? */
-
             const result = await db.collection.updateOne(
                 { "docs.docid": id }, 
                 { $set: { "docs.$.text": req.body.text } },
             );
-            if (result.acknowledged) {
+            if (result.acknowledged && result.modifiedCount == 1) {
                 return true
             } else {
                 return false
@@ -72,7 +60,7 @@ const update = {
                 { $push: { docs: newDoc } }
             )
             
-            if (result.acknowledged == true) {
+            if (result.acknowledged == true && result.modifiedCount == 1) {
                 return true
             } 
     
@@ -96,7 +84,6 @@ const update = {
         const docid = req.body.docid;
         const email = req.body.email;
         const emailToAdd = req.body.emailToAdd;
-
         try {
 
             db = await database.getDb();
@@ -105,7 +92,7 @@ const update = {
                 { $addToSet: { "docs.$[elem].allowed_user": emailToAdd } },
                 { arrayFilters: [ { "elem.docid": docid } ] } )
 
-            if (result.acknowledged == true) {
+            if (result.acknowledged == true && result.modifiedCount == 1) {
                 return true
             } 
     

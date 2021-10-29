@@ -20,26 +20,27 @@ const find = {
                 }}
             }}
             ]).toArray();
-            console.log(result)
             if (result !== undefined) {
                 return result;
+            } 
+        } catch (e) {
+            if (e instanceof TypeError) {
+                return "Id not found, maybe a typeError?"
             }
-            } catch (e) {
-                if (e instanceof TypeError) {
-                    return "Id not found, maybe a typeError?"
+            return res.status(500).json({
+                errors: {
+                    status: 500,
+                    source: "/",
+                    title: "Database error",
+                    detail: e.message
                 }
-                return res.status(500).json({
-                    errors: {
-                        status: 500,
-                        source: "/",
-                        title: "Database error",
-                        detail: e.message
-                    }
-                });
-            } finally {
-            await db.client.close();
-          }
+            });
+        } finally {
+        await db.client.close();
         }
+        
     }
+          
+}
 
 module.exports = find;

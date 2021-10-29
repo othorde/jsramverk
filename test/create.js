@@ -1,32 +1,64 @@
-/* process.env.NODE_ENV = "test"
-
+process.env.NODE_ENV = "test"
 
 var assert = require('assert');
 const create = require("../src/create");
 const database = require("../db/database.js");
 
-beforeEach(async function() {
-	let db;
-	database.resetDb();
-	db = await database.getDb();
-	
+
+afterEach(async function() {
+	await database.resetDb()
 });
 
 
 
 describe('#create()', function() {
-    it('creats a doc with a name and body, returns true if created', async function() {
-      	const document = await create.createDocument(req = {
+    it('creats a user, returns true if created', async function() {
+      	var user = await create.createUser(req = {
 			body: {
-				name: "NAMESENT", body: "BODYSENT"
+				user: "NyAnvändare",
+				psw: "12345",
+				email: "nyanvändare@live.se"
 			}
-		
 		});
-		assert.equal(document, true);
+		assert.equal(user, true);
     });
-
-	
+	it('Trying to create a new user with same Email, should return false', async function(){
+		var user = await create.createUser(req = {
+			body: {
+				user:'NyAnvändare',
+				psw: "12345",
+				email: "nyanvändare@live.se"
+			}
+		});
+		assert.equal(user, true)
+		var user = await create.createUser(req = {
+			body: {
+				user:'NyAnvändare',
+				psw: "12345",
+				email: "nyanvändare@live.se"
+			}
+		});
+		assert.equal(user, false)
+	});
+	it('Trying to add user with missing @ in email, should return false', async function() {
+		var user = await create.createUser(req = {
+			body: {
+				user: "",
+				psw: "",
+				email: "",
+			}
+		});
+		assert.equal(user, false)
+	})
+	it('Trying to add user with psw.length < 5, should return false', async function() {
+		var user = await create.createUser(req = {
+			body: {
+				user: "Olle1",
+				psw: "1234",
+				email: "olle@olle",
+			}
+		});
+		assert.equal(user, false)
+	})
 });
-
-
-	 */
+	
