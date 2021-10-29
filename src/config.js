@@ -3,19 +3,22 @@ const API_URL_LOGIN = 'https://jsramverk-editor-olto20.azurewebsites.net/login';
 const API_PUT_DOC = 'https://jsramverk-editor-olto20.azurewebsites.net/doc';
 const API_URL_AUTHFORUSER = 'https://jsramverk-editor-olto20.azurewebsites.net/authforuser';
 const API_URL_GRAPHQL = 'https://jsramverk-editor-olto20.azurewebsites.net/graphql';
-/* 
-const API_URL = 'http://localhost:1337/list';
+const API_URL_INVITE = 'https://jsramverk-editor-olto20.azurewebsites.net/invite';
+
+
+/* const API_URL = 'http://localhost:1337/list';
 const API_URL_LOGIN = 'http://localhost:1337/login';
 const API_PUT_DOC = 'http://localhost:1337/doc';
 const API_URL_AUTHFORUSER = 'http://localhost:1337/authforuser';
 const API_URL_GRAPHQL = 'http://localhost:1337/graphql';
+const API_URL_INVITE = 'http://localhost:1337/invite'; */
 
- */
 export {
     API_URL,
     API_URL_LOGIN,
     API_PUT_DOC,
     API_URL_AUTHFORUSER,
-    API_URL_GRAPHQL
+    API_URL_GRAPHQL,
+    API_URL_INVITE,
 };
 

@@ -33,6 +33,7 @@ const FormRegister = () => {
         <Wrapper>
             <Content>
                  <h2> Registrera </h2>
+                 <p>Tänk på att lösenordet måste vara minst 5 bokstäver samt att eposten måste innehålla "@" </p>
                 <Signup>
                     <form onSubmit={handleSubmit} className = "register">
                         <label>Enter email:

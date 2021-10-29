@@ -17,32 +17,35 @@ const initialState = {
 
 /* skickar in whatDocument, som är det dokumentet som ska kunna redigeras i editorn */
 const FormAuthUsersToDoc = (whatDocument) => {
-
     const { handleSubmit } = useForm();
     const onChange = data => handleInput(data); // klar
-    const onSubmits = data => handleSubmits(data)
+    const onSubmits = data => handleSubmits(data);
     const myContext = useContext(AppContext);
-    const [state, setState] = useState(initialState); /* dekonstruera state */
-    const [emailToAdd, setEmailToAdd] = useState(""); /* dekonstruera state */
+    const [state, setState] = useState(initialState);
+    const [emailToAdd, setEmailToAdd] = useState("");
 
-    const handleInput = async (emailToAdd) => {
+    const handleInput = (emailToAdd) => {
         setEmailToAdd(emailToAdd)
     };
+   
 
-    // vem får dela vilket dokument?, finns det risk för dubletter?
     const handleSubmits = async (event)  => {
 
-        const token = await myContext.authorized;
-        let email = whatDocument.whatDocument[3];
-        email = email[0];
-        const docid = whatDocument.whatDocument[2]
+        const token = myContext.tokenWhenLoggedIn;
+        if (whatDocument.whatDocument !== "" ) {
+            let email = whatDocument.whatDocument[3];
+            email = email[0];
+            const docid = whatDocument.whatDocument[2]
 
-        if (email === emailToAdd) {
-            alert("Du äger redan dokumentet")
+            if (email === emailToAdd) {
+                alert("Du äger redan dokumentet")
+            } else {
+                alert("Delat")
+                await apisetting.updateUserAuthForDoc(email, docid, emailToAdd, token)
+            }          
         } else {
-            alert("Delat")
-            const res = await apisetting.updateUserAuthForDoc(email, docid, emailToAdd, token)
-        }          
+            alert("Du måste spara dokumetet eller välja ett befintligt dokument för att kunna dela det")
+        }
     }
  
     const fetchDocuments = async() => {
@@ -51,10 +54,7 @@ const FormAuthUsersToDoc = (whatDocument) => {
             let res = await apisetting.getByGraphQl(query)
             const allDocuments = {             
                 oneDocument: res.data.users
-            }
-
-            console.log(allDocuments.oneDocument)
-            
+            }            
             setState(prev => ({
                 ...allDocuments,
                 oneDocument:
@@ -65,10 +65,25 @@ const FormAuthUsersToDoc = (whatDocument) => {
         }
     };
 
-    //initial render 
+    
     useEffect(() => {
-        fetchDocuments();
-    }, [])
+        const timer = setTimeout(() => {
+            handleSubmit();
+        });
+        return () => {
+          clearTimeout(timer);
+        }
+      }, [handleSubmit]);
+
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            fetchDocuments();
+        });
+        return () => {
+          clearTimeout(timer);
+        }
+      }, []);
 
     return (
     <Wrapper>

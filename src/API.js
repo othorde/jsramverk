@@ -1,6 +1,5 @@
-import { API_URL, API_URL_LOGIN, API_PUT_DOC, API_URL_AUTHFORUSER, API_URL_GRAPHQL } from "./config";
+import { API_URL, API_URL_LOGIN, API_PUT_DOC, API_URL_AUTHFORUSER, API_URL_GRAPHQL, API_URL_INVITE } from "./config";
 import { v4 as uuidv4 } from 'uuid';
-
 
 const defaultConfig = {
 	method: 'POST',
@@ -19,12 +18,6 @@ const defaultConfig2 = {
 	},
 };
 
-let query = `query doc($docid: "12343") {
-	docname 
-	text
-  }`;
-
-
 const apisetting = {
 	getByGraphQl: async (query) => {
 
@@ -40,32 +33,12 @@ const apisetting = {
 		return documents;
 	},
 
-/* s */
-/* 	body: JSON.stringify( { query: "{ users { name } }" } )
- */
-
-/* 	getByGraphQl: async (query1) => {
-		await fetch('http://localhost:1337/graphql', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Accept': 'application/json',
-				"Access-Control-Allow-Origin": "*"
-			},
-			body: JSON.stringify({ query: "{ users { name } }" })
-		})
-			.then(r => r.json())
-			.then(data => console.log('data returned:', data));
-
-	}, */
-
 	getAllDocuments: async () => {
 		const endpoint = `${API_URL}`
 		return await (await fetch(endpoint)).json();
 	},
 
 	getAllAuthDocuments: async (user) => {
-
 		const endpoint = `${API_PUT_DOC}`
 		const documents = await (
 			await fetch(endpoint, {
@@ -101,7 +74,6 @@ const apisetting = {
 	},
 
 	createOneUser: async (name, email, psw) => {
-
 		const endpoint = `${API_URL}`
 		let allowed_user = [];
 		allowed_user.push(email)
@@ -120,7 +92,27 @@ const apisetting = {
 				return false
 			}
 	},
-
+		
+	postExecuteCode: async (code) => {
+		var data = {
+			code: btoa(code)
+		};
+		
+		fetch("https://execjs.emilfolino.se/code", {
+			body: JSON.stringify(data),
+			headers: {
+				'content-type': 'application/json'
+			},
+			method: 'POST'
+		})
+		.then(function (response) {
+			return response.json();
+		})
+		.then(function(result) {
+			let decodedOutput = atob(result.data);
+			console.log(decodedOutput); // outputs: hej
+		});
+	},
 
 	findUser: async(email, psw) => {
 		const endpoint = `${API_URL_LOGIN}`
@@ -131,7 +123,6 @@ const apisetting = {
 			  	body: JSON.stringify( {email: email, psw: psw})
 			})
 		  ).json();
-		console.log(result)
 		return result
 	},
 
@@ -143,7 +134,7 @@ const apisetting = {
 	},
 
 
-	addOneDocument: async (docname, text, user, token) => {
+	addOneDocument: async (docname, text, user, token, codeMode) => {
 		const defaultConfigPut = {
 			method: 'PUT',
 			headers: {
@@ -152,8 +143,10 @@ const apisetting = {
 				'x-access-token': token
 			},
 		};
-		const randomnr = uuidv4();
-
+		let randomnr = uuidv4();
+		if (codeMode) {
+			randomnr = `codeMode${randomnr}`
+		}
 		const endpoint = `${API_PUT_DOC}`
 		const document = await (
 			await fetch(endpoint, {
@@ -183,7 +176,6 @@ const apisetting = {
 			  body: JSON.stringify({_id: id, text: text1})
 			})
 		  ).json();
-		  console.log(document)
 		return document;
 	},
 
@@ -197,7 +189,6 @@ const apisetting = {
 				'x-access-token': token
 			},
 		};
-
 		const endpoint = `${API_URL_AUTHFORUSER}`
 		const document = await (
 			await fetch(endpoint, {
@@ -205,9 +196,31 @@ const apisetting = {
 			  body: JSON.stringify({docid: docid, email: email, emailToAdd: emailToAdd})
 			})
 		  ).json();
-		  console.log(document)
 		return document;
 	},
+
+	inviteUser2Doc: async (email, user, token) => {
+	
+		const endpoint = `${API_URL_INVITE}`
+		const defaultConfigAuthPost = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				"Access-Control-Allow-Origin": "*",
+				'x-access-token': token
+			},
+		};
+		console.log(token, user, email
+			)
+		const inviteConfirmation = await (
+			await fetch(endpoint, {
+			  	...defaultConfigAuthPost,
+			  	body: JSON.stringify( {email: email, user: user } )
+			})
+		  ).json();
+		  console.log("inviteConfirmation", inviteConfirmation)
+		return inviteConfirmation;
+	}
 
 };
 

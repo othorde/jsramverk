@@ -29,11 +29,10 @@ const FormLogin = () => {
         try {
             let res = await apisetting.findUser(inputs.username, inputs.psw)
             if (res.data.msg === true) {
-                if (res.data.token) {
-                    await myContext.authorizedOrNot(res.data.token)
-                    await myContext.setUserLoggedIn(inputs.username)
-                    history.push("/docs");
-                } 
+                await myContext.setTokenForUser(res.data.token);
+                await myContext.authorizedOrNot(true);
+                await myContext.setUserLoggedIn(inputs.username);
+                history.push("/docs");
             }
         } catch (typeError) {
             alert("Wrong password or username")

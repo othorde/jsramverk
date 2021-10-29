@@ -1,13 +1,24 @@
-import React, {useState, useEffect} from "react";
+
+import React, {useState, useEffect, useContext} from "react";
+import {UnControlled as CodeMirror} from 'react-codemirror2'
+import AppContext from './authorized';
+import {Redirect} from "react-router-dom";
+
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
 
 //Editor
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-/* initierar klienten med en endpoint som är URL till den server vi vill att paketet ska skickas till */
+//Components
+
 import FormCreate from "./FormCreate";
 import socketIOClient from "socket.io-client";
-
-//Components
+import PDF from "./PDF";
+import FormInvite from "./FormInvite/invite";
+import apisetting from "../API";
+require('codemirror/mode/xml/xml');
+require('codemirror/mode/javascript/javascript');
 
 const Editor = (theDocument) => {
     let doc = theDocument.whatDocument;
@@ -15,13 +26,13 @@ const Editor = (theDocument) => {
     const [socket, setSocket] = useState('');
     const [docc, setDocc] = useState("");
     const [editorState, setEditorState] = useState("");
+    const [pdfCreateState, setPdfCreateState] = useState(false);
+    const [codeMode, setCodeMode] = useState(false);
+    const myContext = useContext(AppContext);
 
     useEffect(() => {
         const ENDPOINT = "https://jsramverk-editor-olto20.azurewebsites.net/";
 
-        if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "") {
-            const ENDPOINT = "localhost:1337";
-        }
         const s = socketIOClient(ENDPOINT);
         setDocc(doc)
         setSocket(s)
@@ -29,16 +40,14 @@ const Editor = (theDocument) => {
         return () => { 
             s.disconnect()
         }
-    }, [doc[1]])
+    }, [doc])  // ändrade från doc[1] till doc?
 
     useEffect(() => {
         if (editorContent === "") return
         socket.emit("create", docc[2]); // innebär att vi joinar alltid rum, om vi är i samma doc
         socket.emit("changes", editorContent) // från klient till server
 
-    }, [editorContent])
-    
-
+    }, [editorContent, docc, socket]) //la till docc och socket
 
     useEffect(() => {
         if (editorContent === "") return
@@ -46,7 +55,7 @@ const Editor = (theDocument) => {
             let newData = [];
             newData[0] = data[0]; //ny body
             newData[1] = docc[1]; // samma titel
-            newData[2] = data[1]; // id 
+            newData[2] = data[1]; // id
             setDocc(newData)            
         }
 
@@ -54,40 +63,121 @@ const Editor = (theDocument) => {
         return () => {
             socket.off("receive-changes", handler) // från klient till server
         }
-    }, [editorContent])
-
+    }, [editorContent, socket, docc])  //la till docc och socket
 
     const handleClick = async() => {
         if (editorState !== undefined) {
-            setEditorContent([editorState.getData(), doc[2], doc[3]])
+            if(codeMode) {
+                setEditorContent([editorState.getValue(), doc[2], doc[3], codeMode])
+            } else {
+                setEditorContent([editorState.getData(), doc[2], doc[3]])
+            }
         }
     }
 
+    const toggleStatePdf = (e) => {
+        e.preventDefault();
+        setPdfCreateState(false)
+    }
+
+    const toggleEditor = (e) => {
+        e.preventDefault();
+        if (codeMode) {
+            setCodeMode(false)
+        } else {
+            setCodeMode(true)
+        }
+    }
+
+    const createPdf = async(e) => {
+        if (editorContent[0] !== undefined) {
+            e.preventDefault();
+            setPdfCreateState(true);
+        } else {
+            alert("Kan inte skapa en tom PDF. Skriv något i editorn eller hämta ett dokument")
+        }
+    }
+
+    const executeCode = async(e) => {
+        await apisetting.postExecuteCode(editorContent[0])
+    }
+
     useEffect(() => {
-        }, [setEditorState])
-    
-  
+        if (docc) {
+            if(codeMode) {
+                setEditorContent([editorState.getValue(), doc[2], doc[3], codeMode])
+            } else {
+                setEditorContent([editorState.getData(), doc[2], doc[3]])
+            }
+        }
+    }, [setEditorState, editorState, doc, codeMode, docc])  //la till docc och codeMode
+
+    if (!myContext.authorized) {
+        return <Redirect to="/login"/>;
+    }
+
     return (
     <>
-    <h2 data-testid="header"> {docc[1]} </h2>
+    { !pdfCreateState ?
+    (
+    <div>
 
-    <div onKeyUp={(e) => { handleClick() }}> 
-          
-        <CKEditor data-testid="editor"  
-        class="editor"
-        editor={  ClassicEditor }
-        data={docc[0]}
-        onReady={ editor => {
-            setEditorState(editor)
-        } }
-      /*   onChange={ ( event, editor ) => {
-            setEditorContent([editor.getData(), doc[2], doc[3]])
-        } } */
-  
-        //onKeyUp={(e) => this.inputChange('name', e.target.value)}
-    /> </div>
+        <h2 data-testid="header"> {docc[1]} </h2>
+        {codeMode ? (        
+            <button onClick={toggleEditor}> {codeMode } Editor</button>
+            ): 
+            <button onClick={toggleEditor}> {codeMode } CodeMode</button>}
 
-    <FormCreate editorContent={editorContent}/>
+            <div onKeyUp={(e) => { handleClick() }}>
+            { !codeMode ? (
+
+                <CKEditor 
+                 data-testid="editor"  
+                    class="editor"
+                    editor={  ClassicEditor  }
+                    config={{
+                   
+					}}
+                    data={docc[0]}
+
+                    onReady={ editor => {
+                        setEditorState(editor)
+                    } }
+
+                />
+
+                ) : (
+            <div>
+                <CodeMirror
+                    value={docc[0]}
+                    options={{
+                        mode: 'xml',
+                        theme: 'material',
+                        lineNumbers: true
+                    }}
+                    editorDidMount={(editor, data) => {
+                        setEditorState(editor)
+                    }}
+                />
+                <button onClick={executeCode}>Exekvera koden</button>
+            </div>
+            )}
+            </div>
+
+        <button onClick={createPdf}
+            type="button">
+            Skapa PDF </button>
+        <FormCreate editorContent={editorContent}/>
+        <FormInvite editorContent={editorContent}/>
+         
+    </div>)
+    : 
+    ( <div>
+        <PDF editorContent={editorContent}/>
+        <button onClick={toggleStatePdf}>Redigera dokumentet</button>
+    </div>
+    )
+    }
     </>
     )
 }

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-
 import { useForm } from "react-hook-form";
 import { useContext } from 'react';
 import {Redirect} from "react-router-dom";
@@ -17,9 +16,7 @@ const initialState = {
 
 };
 
-
 const Form = () => {
-   /*  const {state, getDataFromEditor} = useDocumentFetch(); */ /* hämtar  */
     const { handleSubmit } = useForm();
     const onChange = data => handleInput(data); // klar
     const [whatDocument, setWhatDocument] = useState(null); 
@@ -29,7 +26,9 @@ const Form = () => {
 
     const handleInput = async (data) => {
         setWhatDocument(data)
+    
     };
+
 
     useEffect(() => {
         const fetchDocument = async () => {
@@ -40,10 +39,10 @@ const Form = () => {
                         docname
                         text
                         allowed_user
-                        
                     } 
                 }`
                 let res = await apisetting.getByGraphQl(query)
+
                 if (res.length !== 0) {
                     setTheDocument([
                         res.data.doc.text, 
@@ -57,7 +56,6 @@ const Form = () => {
            fetchDocument()
         }, [setWhatDocument, whatDocument])
 
-        
         const handleAuthDocuments = async() => {
             const user = await myContext.user
             const authDocs = {
@@ -75,12 +73,6 @@ const Form = () => {
         const handleClick = async(e) => {
             handleAuthDocuments();
         }
-
-
-        useEffect(() => {
-            handleAuthDocuments();
-        }, []);
-
 
         if (!myContext.authorized) {
             return <Redirect to="/login"/>;
