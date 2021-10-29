@@ -12,7 +12,7 @@ describe('#create()', function() {
     it('creats a user, returns true if created', async function() {
       	var user = await create.createUser(req = {
 			body: {
-				user: "NyAnvändare",
+				user: "NyAnvandare",
 				psw: "12345",
 				email: "nyanvandare@live.se"
 			}
@@ -23,7 +23,7 @@ describe('#create()', function() {
 
 		var user1 = await create.createUser(req = {
 			body: {
-				user:'NyAnvändare',
+				user:'NyAnvandare',
 				psw: "12345",
 				email: "nyanvandare@live.se"
 			}
