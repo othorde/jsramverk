@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1635538962974" clover="3.2.0">
-  <project timestamp="1635538962974" name="All files">
-    <metrics statements="197" coveredstatements="156" conditionals="59" coveredconditionals="35" methods="22" coveredmethods="19" elements="278" coveredelements="210" complexity="0" loc="197" ncloc="197" packages="2" files="10" classes="10"/>
+<coverage generated="1635541995015" clover="3.2.0">
+  <project timestamp="1635541995015" name="All files">
+    <metrics statements="195" coveredstatements="154" conditionals="59" coveredconditionals="35" methods="22" coveredmethods="19" elements="276" coveredelements="208" complexity="0" loc="195" ncloc="195" packages="2" files="10" classes="10"/>
     <package name="db">
       <metrics statements="22" coveredstatements="16" conditionals="8" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="database.js" path="C:\Users\Othor\dbwebb-kurser\jsramverk\backend\db\database.js">
@@ -9,29 +9,29 @@
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
-        <line num="14" count="270" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="232" type="cond" truecount="1" falsecount="1"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="23" count="0" type="stmt"/>
-        <line num="25" count="270" type="stmt"/>
-        <line num="26" count="270" type="stmt"/>
-        <line num="27" count="270" type="stmt"/>
-        <line num="30" count="270" type="stmt"/>
-        <line num="34" count="270" type="stmt"/>
-        <line num="35" count="270" type="stmt"/>
-        <line num="37" count="270" type="stmt"/>
-        <line num="45" count="138" type="cond" truecount="1" falsecount="1"/>
-        <line num="47" count="138" type="stmt"/>
-        <line num="48" count="138" type="stmt"/>
-        <line num="49" count="138" type="stmt"/>
+        <line num="25" count="232" type="stmt"/>
+        <line num="26" count="232" type="stmt"/>
+        <line num="27" count="232" type="stmt"/>
+        <line num="30" count="232" type="stmt"/>
+        <line num="34" count="232" type="stmt"/>
+        <line num="35" count="232" type="stmt"/>
+        <line num="37" count="232" type="stmt"/>
+        <line num="45" count="132" type="cond" truecount="1" falsecount="1"/>
+        <line num="47" count="132" type="stmt"/>
+        <line num="48" count="132" type="stmt"/>
+        <line num="49" count="132" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src">
-      <metrics statements="175" coveredstatements="140" conditionals="51" coveredconditionals="33" methods="20" coveredmethods="17"/>
+      <metrics statements="173" coveredstatements="138" conditionals="51" coveredconditionals="33" methods="20" coveredmethods="17"/>
       <file name="auth.js" path="C:\Users\Othor\dbwebb-kurser\jsramverk\backend\src\auth.js">
         <metrics statements="31" coveredstatements="17" conditionals="8" coveredconditionals="2" methods="10" coveredmethods="7"/>
         <line num="1" count="1" type="stmt"/>
@@ -39,13 +39,13 @@
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="12" count="6" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="14" count="6" type="stmt"/>
-        <line num="15" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="16" count="6" type="stmt"/>
-        <line num="21" count="6" type="stmt"/>
+        <line num="11" count="7" type="stmt"/>
+        <line num="12" count="7" type="stmt"/>
+        <line num="13" count="7" type="stmt"/>
+        <line num="14" count="7" type="stmt"/>
+        <line num="15" count="7" type="cond" truecount="1" falsecount="1"/>
+        <line num="16" count="7" type="stmt"/>
+        <line num="21" count="7" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
         <line num="27" count="2" type="stmt"/>
         <line num="28" count="2" type="cond" truecount="1" falsecount="1"/>
@@ -73,23 +73,23 @@
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="14" count="5" type="stmt"/>
-        <line num="17" count="5" type="stmt"/>
-        <line num="18" count="5" type="stmt"/>
-        <line num="19" count="5" type="stmt"/>
-        <line num="21" count="5" type="cond" truecount="5" falsecount="0"/>
-        <line num="23" count="3" type="stmt"/>
-        <line num="24" count="3" type="stmt"/>
-        <line num="25" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="21" count="6" type="cond" truecount="5" falsecount="0"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="25" count="4" type="cond" truecount="4" falsecount="0"/>
         <line num="26" count="2" type="stmt"/>
         <line num="27" count="2" type="stmt"/>
         <line num="28" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="29" count="2" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
         <line num="37" count="2" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
-        <line num="49" count="5" type="stmt"/>
+        <line num="49" count="6" type="stmt"/>
         <line num="54" count="1" type="stmt"/>
       </file>
       <file name="find.js" path="C:\Users\Othor\dbwebb-kurser\jsramverk\backend\src\find.js">
@@ -158,41 +158,39 @@
         <line num="36" count="1" type="stmt"/>
       </file>
       <file name="invite.js" path="C:\Users\Othor\dbwebb-kurser\jsramverk\backend\src\invite.js">
-        <metrics statements="18" coveredstatements="15" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <metrics statements="16" coveredstatements="13" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="3" type="stmt"/>
         <line num="7" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
-        <line num="11" count="3" type="cond" truecount="4" falsecount="0"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
+        <line num="9" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="25" count="1" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
       </file>
       <file name="mailavaliable.js" path="C:\Users\Othor\dbwebb-kurser\jsramverk\backend\src\mailavaliable.js">
         <metrics statements="14" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="9" count="6" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="12" count="6" type="stmt"/>
-        <line num="13" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="7" type="stmt"/>
+        <line num="11" count="7" type="stmt"/>
+        <line num="12" count="7" type="stmt"/>
+        <line num="13" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="14" count="3" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
         <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="20" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
-        <line num="31" count="6" type="stmt"/>
+        <line num="31" count="7" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
       </file>
       <file name="update.js" path="C:\Users\Othor\dbwebb-kurser\jsramverk\backend\src\update.js">

@@ -39,7 +39,14 @@ describe('#create()', function() {
 				email: "nyanvändare@live.se"
 			}
 		});
-		assert.equal(user, false)
+		var user2 = await create.createUser(req = {
+			body: {
+				user:'NyAnvändare',
+				psw: "12345",
+				email: "nyanvändare@live.se"
+			}
+		});
+		assert.equal(user2, false)
 	});
 	it('Trying to add user with missing @ in email, should return false', async function() {
 		var user = await create.createUser(req = {

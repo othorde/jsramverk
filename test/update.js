@@ -6,7 +6,7 @@ const database = require("../db/database.js");
 const find = require("../src/find")
 const { updateDocument } = require('../src/update');
 
-/* beforeEach(async function() {
+beforeEach(async function() {
     
     await database.resetDb() // denna stänger också db
 
@@ -24,7 +24,7 @@ const { updateDocument } = require('../src/update');
 afterEach(async function() {
     await database.resetDb() // denna stänger också db
 });
- */
+
 describe('#update document()', async function() {
    
     it('tries to update doc, should return true, and find.finddoc should show it', async function() {
