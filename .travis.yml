@@ -2,10 +2,12 @@ language: node_js
 node_js:
     - "node"
     - "14"
-    - "13"
     - "12"
-    - "11"
 services: mongodb
+
+env:
+  - JWT_SECRET='longsecretlongsecretlongsecretlongsecretlongsecretlongsecret1234'
+  - SENDGRID_API_KEY='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'
 
 before_script:
     - npm install 

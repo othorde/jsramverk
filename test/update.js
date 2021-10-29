@@ -4,7 +4,6 @@ var assert = require('assert');
 const update = require("../src/update");
 const database = require("../db/database.js");
 const find = require("../src/find")
-const { updateDocument } = require('../src/update');
 
 beforeEach(async function() {
     

@@ -22,8 +22,8 @@ const database = {
             password =  config.password || process.env.PASSWORD;
             dsn = `mongodb+srv://${username}:${password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`;
         } else {
-            username =  "texteditor";
-            password =  "hejhej";
+            username =  config.username || process.env.USERNAME;
+            password =  config.password || process.env.PASSWORD;
             dsn = `mongodb+srv://${username}:${password}@cluster0.gywby.mongodb.net/test?retryWrites=true&w=majority`
         }
 
