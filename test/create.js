@@ -14,7 +14,7 @@ describe('#create()', function() {
 			body: {
 				user: "NyAnvändare",
 				psw: "12345",
-				email: "nyanvändare@live.se"
+				email: "nyanvandare@live.se"
 			}
 		});
 		assert.equal(user, true);
@@ -25,7 +25,7 @@ describe('#create()', function() {
 			body: {
 				user:'NyAnvändare',
 				psw: "12345",
-				email: "nyanvändare@live.se"
+				email: "nyanvandare@live.se"
 			}
 		});
 
