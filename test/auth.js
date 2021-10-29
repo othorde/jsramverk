@@ -20,9 +20,6 @@ let db;
   await db.client.close();
 });
 
-afterEach(async function() {
-  await database.resetDb() // denna stänger också db
-});
 
 
 describe('#hash()', function() {
