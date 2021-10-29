@@ -1,7 +1,7 @@
 process.env.NODE_ENV = "test"
 
 var assert = require('assert');
-const findAuthDoc = require("../src/findAuthDoc");
+
 const invite = require("../src/invite.js");
 
 

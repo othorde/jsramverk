@@ -42,24 +42,23 @@ describe('#update document()', async function() {
 
 describe('#update users document()', async function() {
    
-    it('tries to update doc, should return true and finddocument should find it', async function() {
-        let email= "test1@live.se";
+    it('tries to update doc with false docid, should return false', async function() {
 
         let req = {
             body: {
                 email: "test1@live.se",
                 docName: "Nytt doc1",
                 text: "Ny text igen",
-                randomnr: "123123123"
+                randomnr: "1231234"
             }
         }
         const updatedDoc = await update.updateUsersDocuments(req);
 
-        let foundDoc = await find.findDocument("123123123");
+        let foundDoc = await find.findDocument("123123");
         let newtext = foundDoc[0].docs[0].text;
-
-        assert.equal(updatedDoc, true)
-        assert.equal(newtext, "Ny text igen")
+        console.log(newtext)
+        assert.equal(updatedDoc, undefined)
+        assert.equal(newtext, "Ny text")
 
     });
 
@@ -77,12 +76,10 @@ describe('#update users document()', async function() {
         const updatedDoc = await update.updateUsersDocuments(req);
         assert.equal(updatedDoc, undefined)
     });
-});
 
 
 
-describe('#update Auth for user', async function() {
-   
+
     it('tries to update doc, should return true and finddocument should find it', async function() {
         let email= "test1@live.se";
         let req = {
@@ -113,7 +110,7 @@ describe('#update Auth for user', async function() {
         const updatedDoc = await update.updateAuthForUser(req);
         assert.equal(updatedDoc, true)
     });
+
+
+
 });
-
-
-

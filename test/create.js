@@ -5,10 +5,8 @@ const create = require("../src/create");
 const database = require("../db/database.js");
 
 
-/* afterEach(async function() {
-    await database.resetDb() // denna stänger också db
-});
- */
+
+
 
 describe('#create()', function() {
     it('creats a user, returns true if created', async function() {
@@ -23,14 +21,6 @@ describe('#create()', function() {
     });
 	it('Trying to create a new user with same Email, should return false', async function(){
 
-		var user = await create.createUser(req = {
-			body: {
-				user:'NyAnvändare',
-				psw: "12345",
-				email: "nyanvändare@live.se"
-			}
-		});
-		assert.equal(user, true)
 		var user1 = await create.createUser(req = {
 			body: {
 				user:'NyAnvändare',
@@ -38,14 +28,10 @@ describe('#create()', function() {
 				email: "nyanvändare@live.se"
 			}
 		});
-		var user2 = await create.createUser(req = {
-			body: {
-				user:'NyAnvändare',
-				psw: "12345",
-				email: "nyanvändare@live.se"
-			}
-		});
-		assert.equal(user2, false)
+
+		console.log(user1)
+
+		assert.equal(user1, false)
 	});
 	it('Trying to add user with missing @ in email, should return false', async function() {
 		var user = await create.createUser(req = {
@@ -68,4 +54,4 @@ describe('#create()', function() {
 		assert.equal(user, false)
 	})
 });
-	
+
