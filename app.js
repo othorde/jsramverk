@@ -27,10 +27,12 @@ const index = require('./routes/index');
 const port = process.env.PORT || 1337;
 
 // origin: "http://www.student.bth.se",
+//        origin: "https://www.student.bth.se",
 // origin: "http://localhost:3000",
+
 const io = require("socket.io")(httpServer, {
     cors: {
-        origin: "https://www.student.bth.se",
+        origin: "http://localhost:3000",
         methods: ["GET", "POST"]
     }
 });

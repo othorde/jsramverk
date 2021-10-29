@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for backend/src/create.js</title>
+    <title>Code coverage report for backend/src/findAuthDoc.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">backend/src</a> create.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">backend/src</a> findAuthDoc.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.73% </span>
+                <span class="strong">21.43% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/22</span>
+                <span class='fraction'>3/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.73% </span>
+                <span class="strong">21.43% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/22</span>
+                <span class='fraction'>3/14</span>
             </div>
         
             
@@ -96,54 +96,26 @@
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -163,59 +135,45 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
- * Connect to the database and setup it with some default data.
- */
-"use strict";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+&nbsp;
 const database = require("../db/database.js");
-const mailAvaliable = require("./mailavaliable");
-const auth = require("./auth");
 &nbsp;
-const create = {
-    createUser: <span class="fstat-no" title="function not covered" >as</span>ync function (req, res) {
-        let user;
+&nbsp;
+&nbsp;
+const findAuthDoc = {
+&nbsp;
+    findAuthDocs: <span class="fstat-no" title="function not covered" >as</span>ync function (req) {
         let db;
-        let salt = <span class="cstat-no" title="statement not covered" >10;</span>
-        let hashed;
-        let isAvaliable;
-<span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            user = req.body;</span>
-<span class="cstat-no" title="statement not covered" >            db = await database.getDb();</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >            if (user.email.length &gt;= 5 &amp;&amp; user.psw.length &gt;= 5 &amp;&amp; user.email.includes("@"))</span>
-                {
-<span class="cstat-no" title="statement not covered" >                    hashed = await auth.hash(user.psw, salt)</span>
-<span class="cstat-no" title="statement not covered" >                    isAvaliable = await mailAvaliable.isMailAvaliable(req.body.email)</span>
-<span class="cstat-no" title="statement not covered" >                    if (isAvaliable == true &amp;&amp; hashed) {</span>
-<span class="cstat-no" title="statement not covered" >                        user.psw = hashed;</span>
-                        let result = <span class="cstat-no" title="statement not covered" >await db.collection.insertOne(user);</span>
-<span class="cstat-no" title="statement not covered" >                        if (result) {</span>
-<span class="cstat-no" title="statement not covered" >                            return true</span>
-                        } else {
-<span class="cstat-no" title="statement not covered" >                            return false</span>
-                        }
-                    } else {
-<span class="cstat-no" title="statement not covered" >                        return false</span>
-                    }
-                } else {
-<span class="cstat-no" title="statement not covered" >                    return false</span>
-                } 
-        } catch (e) {
-<span class="cstat-no" title="statement not covered" >                return res.status(500).json({</span>
-                    errors: {
-                        status: 500,
-                        path: "/data",
-                        title: "Database error",
-                        message: e.message
-                    }
-                });
-            } finally {
-<span class="cstat-no" title="statement not covered" >                await db.client.close();</span>
+        const user = <span class="cstat-no" title="statement not covered" >req.body.user;</span>
+        const options  = <span class="cstat-no" title="statement not covered" >{</span>
+            projection: { "docs.docname": 1, "docs.docid": 1, "docs.text": 1 }
         }
-    },
+        const query = <span class="cstat-no" title="statement not covered" >{ "docs.allowed_user": user }</span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            db = await database.getDb();</span>
+            const res = <span class="cstat-no" title="statement not covered" >await db.collection.find(query, options).toArray();</span>
+<span class="cstat-no" title="statement not covered" >            if (res) {</span>
+<span class="cstat-no" title="statement not covered" >                return res;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                return false;</span>
+            }
+        } catch (e) {
+<span class="cstat-no" title="statement not covered" >            return res.status(500).json({</span>
+                errors: {
+                    status: 500,
+                    source: "/",
+                    title: "Database error",
+                    detail: e.message
+                }
+            });
+        } finally {
+<span class="cstat-no" title="statement not covered" >            await db.client.close();</span>
+        }
+    }
 }
 &nbsp;
-module.exports = create;
+module.exports = findAuthDoc;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

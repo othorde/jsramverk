@@ -92,10 +92,9 @@ const update = {
                 { $addToSet: { "docs.$[elem].allowed_user": emailToAdd } },
                 { arrayFilters: [ { "elem.docid": docid } ] } )
 
-            if (result.acknowledged == true && result.modifiedCount == 1) {
+            if (result.acknowledged == true) {
                 return true
-            } 
-    
+            }
         } catch (e) {
             return res.status(500).json({
                 errors: {
