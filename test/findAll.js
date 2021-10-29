@@ -26,10 +26,9 @@ describe('#findAll()', function() {
         assert.equal(users[2], undefined)
     })
 
-    it("clear db and finall, should return null", async function() {
-        await database.resetDb() // denna stänger också db
-        const users = await findAll.findAllDoc({}, {}, 0);
-        assert.equal(users.length, 0)
+    it("findall, should return 6", async function() {
+        const users = await findAll.findAllDoc({}, {}, 6);
+        assert.equal(users.length, 6)
     })
 });
 /* after(async function() {
