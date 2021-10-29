@@ -18,9 +18,7 @@ before(async function() {
     await db.client.close();
 });
 
-after(async function() {
-    await database.resetDb() // denna stänger också db
-});
+
 
 describe('#findUser()', async function() {
     it('find all info about a user by mail and psw, should return true with test1@live.se', async function() {
@@ -51,3 +49,6 @@ describe('#findUser()', async function() {
     });
 });
 
+after(async function() {
+    await database.resetDb() // denna stänger också db
+});

@@ -5,6 +5,7 @@
 const database = require("../db/database.js");
 const mailAvaliable = require("./mailavaliable");
 const auth = require("./auth");
+const { isMailAvaliable } = require("./mailavaliable");
 
 const create = {
     createUser: async function (req, res) {

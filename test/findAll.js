@@ -17,9 +17,6 @@ beforeEach(async function() {
     await db.client.close();
 });
 
-afterEach(async function() {
-    await database.resetDb() // denna stänger också db
-});
 
 
 describe('#findAll()', function() {
@@ -47,4 +44,7 @@ describe('#findAll()', function() {
         const users = await findAll.findAllDoc({}, {}, 0);
         assert.equal(users.length, 0)
     })
+});
+after(async function() {
+    await database.resetDb() // denna stänger också db
 });

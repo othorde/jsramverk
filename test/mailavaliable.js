@@ -15,9 +15,7 @@ before(async function() {
     await db.client.close();
 });
 
-after(async function() {
-    await database.resetDb() // denna stänger också db
-})
+
 
 describe("#mail avaliable", function() {
 
@@ -39,4 +37,8 @@ describe("#mail avaliable", function() {
             assert.equal(trueOrFalse, false)
     });
 
+})
+
+after(async function() {
+    await database.resetDb() // denna stänger också db
 })

@@ -20,9 +20,10 @@ beforeEach(async function() {
     await db.client.close();
 });
 
+
 afterEach(async function() {
     await database.resetDb() // denna stänger också db
-})
+});
 
 describe('#update document()', async function() {
    
@@ -128,10 +129,9 @@ describe('#update Auth for user', async function() {
             }
         }
         const updatedDoc = await update.updateAuthForUser(req);
-        assert.equal(updatedDoc, undefined)
+        assert.equal(updatedDoc, true)
     });
 });
-
 
 
 

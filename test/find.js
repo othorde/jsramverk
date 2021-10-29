@@ -4,7 +4,7 @@ var assert = require('assert');
 const find = require("../src/find");
 const database = require("../db/database.js");
 
-beforeEach(async function() {
+before(async function() {
     
     await database.resetDb() // denna stänger också db
 
@@ -19,10 +19,10 @@ beforeEach(async function() {
 
 });
 
-afterEach(async function() {
+/* afterEach(async function() {
 
     await database.resetDb() // denna stänger också db
-});
+}); */
 
 
 describe('#find()', function() {
@@ -47,3 +47,6 @@ describe('#find()', function() {
     });
 });
 
+after(async function() {
+    await database.resetDb() // denna stänger också db
+});

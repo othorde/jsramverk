@@ -5,11 +5,10 @@ const create = require("../src/create");
 const database = require("../db/database.js");
 
 
-afterEach(async function() {
-	await database.resetDb()
+/* afterEach(async function() {
+    await database.resetDb() // denna stänger också db
 });
-
-
+ */
 
 describe('#create()', function() {
     it('creats a user, returns true if created', async function() {
@@ -23,6 +22,8 @@ describe('#create()', function() {
 		assert.equal(user, true);
     });
 	it('Trying to create a new user with same Email, should return false', async function(){
+		await database.resetDb() // denna stänger också db
+
 		var user = await create.createUser(req = {
 			body: {
 				user:'NyAnvändare',
@@ -62,3 +63,6 @@ describe('#create()', function() {
 	})
 });
 	
+after(async function() {
+    await database.resetDb() // denna stänger också db
+});

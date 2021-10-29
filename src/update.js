@@ -94,7 +94,10 @@ const update = {
 
             if (result.acknowledged == true) {
                 return true
+            } else {
+                return false
             }
+    
         } catch (e) {
             return res.status(500).json({
                 errors: {

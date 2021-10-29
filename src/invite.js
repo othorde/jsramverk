@@ -6,8 +6,6 @@ const invite = {
 		dotenv.config();
 		sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-		console.log("req.body", req.body)
-
         if (req.body.email.length > 4 && req.body.email.includes("@") ) {
 
 			const msg = {
@@ -20,7 +18,6 @@ const invite = {
 
 			try {
 				let sendMail = await sgMail.send(msg);
-				console.log("sendMailsendMail", sendMail)
 				if (sendMail[0].statusCode == 202) {
 					return true
 				} else {
