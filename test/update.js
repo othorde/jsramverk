@@ -19,7 +19,6 @@ beforeEach(async function() {
     await db.client.close();
 });
 
-
 afterEach(async function() {
     await database.resetDb() // denna stänger också db
 });
