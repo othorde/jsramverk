@@ -4,7 +4,7 @@ var assert = require('assert');
 const findAuthDoc = require("../src/findAuthDoc");
 const database = require("../db/database.js");
 
-beforeEach(async function() {
+/* beforeEach(async function() {
     
     await database.resetDb() // denna stänger också db
 
@@ -20,7 +20,7 @@ beforeEach(async function() {
 
 afterEach(async function() {
     await database.resetDb() // denna stänger också db
-});
+}); */
 
 describe('#findAuthDoc()', async function() {
    

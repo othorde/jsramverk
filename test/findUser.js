@@ -3,7 +3,7 @@ process.env.NODE_ENV = "test"
 var assert = require('assert');
 const findUser = require("../src/findUser");
 const database = require("../db/database.js");
-
+/* 
 before(async function() {
     
     await database.resetDb() // denna stänger också db
@@ -18,7 +18,7 @@ before(async function() {
     await db.client.close();
 });
 
-
+ */
 
 describe('#findUser()', async function() {
     it('find all info about a user by mail and psw, should return true with test1@live.se', async function() {
@@ -49,6 +49,6 @@ describe('#findUser()', async function() {
     });
 });
 
-after(async function() {
+/* after(async function() {
     await database.resetDb() // denna stänger också db
-});
+}); */

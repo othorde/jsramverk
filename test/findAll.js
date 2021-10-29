@@ -4,7 +4,7 @@ process.env.NODE_ENV = "test"
 var assert = require('assert');
 const findAll = require("../src/findAll");
 const database = require("../db/database.js");
-
+/* 
 beforeEach(async function() {
 
     let db;
@@ -15,7 +15,7 @@ beforeEach(async function() {
         { name: "test3", email: "test3@live.se", psw: "123433", docs: [{ docname: "test3Dok", docid: "345345", allowed_users: ["test3@live.se", "test2@live.se", "test1@live.se"] }] },
     ])
     await db.client.close();
-});
+}); */
 
 
 
@@ -45,6 +45,7 @@ describe('#findAll()', function() {
         assert.equal(users.length, 0)
     })
 });
-after(async function() {
+/* after(async function() {
     await database.resetDb() // denna stänger också db
 });
+ */

@@ -63,6 +63,3 @@ describe('#create()', function() {
 	})
 });
 	
-after(async function() {
-    await database.resetDb() // denna stänger också db
-});

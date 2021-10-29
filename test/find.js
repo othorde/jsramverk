@@ -3,7 +3,7 @@ process.env.NODE_ENV = "test"
 var assert = require('assert');
 const find = require("../src/find");
 const database = require("../db/database.js");
-
+/* 
 before(async function() {
     
     await database.resetDb() // denna stänger också db
@@ -18,7 +18,7 @@ before(async function() {
     await db.client.close();
 
 });
-
+ */
 /* afterEach(async function() {
 
     await database.resetDb() // denna stänger också db
@@ -47,6 +47,6 @@ describe('#find()', function() {
     });
 });
 
-after(async function() {
+/* after(async function() {
     await database.resetDb() // denna stänger också db
-});
+}); */
