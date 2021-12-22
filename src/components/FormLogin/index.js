@@ -65,11 +65,9 @@ const FormLogin = () => {
                             />
                             </label>
                             <input type="submit" value="Logga in" />
-
                     </form>
-
                 </Signup>
-                <form action="/~olto20/editor/#/registrera" >
+                <form action="/~olto20/editor/#/registrera" > {/* /~olto20/editor/#/registrera */}
                 <input type="submit" value="Gå till registrera" />
                 </form>
             </Content>

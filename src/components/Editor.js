@@ -40,14 +40,14 @@ const Editor = (theDocument) => {
         return () => { 
             s.disconnect()
         }
-    }, [doc])  // ändrade från doc[1] till doc?
+    }, [doc[1]])  // ändrade från doc[1] till doc?
 
     useEffect(() => {
         if (editorContent === "") return
         socket.emit("create", docc[2]); // innebär att vi joinar alltid rum, om vi är i samma doc
         socket.emit("changes", editorContent) // från klient till server
 
-    }, [editorContent, docc, socket]) //la till docc och socket
+    }, [editorContent,socket])
 
     useEffect(() => {
         if (editorContent === "") return
@@ -58,12 +58,11 @@ const Editor = (theDocument) => {
             newData[2] = data[1]; // id
             setDocc(newData)            
         }
-
         socket.on("receive-changes", handler) // från klient till server
         return () => {
             socket.off("receive-changes", handler) // från klient till server
         }
-    }, [editorContent, socket, docc])  //la till docc och socket
+    }, [editorContent])  //la till docc och socket
 
     const handleClick = async() => {
         if (editorState !== undefined) {
@@ -110,7 +109,7 @@ const Editor = (theDocument) => {
                 setEditorContent([editorState.getData(), doc[2], doc[3]])
             }
         }
-    }, [setEditorState, editorState, doc, codeMode, docc])  //la till docc och codeMode
+    }, [setEditorState, editorState])  //la till docc och codeMode
 
     if (!myContext.authorized) {
         return <Redirect to="/login"/>;
@@ -167,8 +166,9 @@ const Editor = (theDocument) => {
         <button onClick={createPdf}
             type="button">
             Skapa PDF </button>
-        <FormCreate editorContent={editorContent}/>
+        
         <FormInvite editorContent={editorContent}/>
+        <FormCreate editorContent={editorContent}/>
          
     </div>)
     : 

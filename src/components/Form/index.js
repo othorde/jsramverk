@@ -29,27 +29,36 @@ const Form = () => {
     
     };
 
-
+    console.log(whatDocument)
     useEffect(() => {
         const fetchDocument = async () => {
             if (whatDocument) {
-                var query = `query 
-                    { doc(docid: \"${whatDocument}\" ) 
-                    { 
-                        docname
-                        text
-                        allowed_user
-                    } 
-                }`
-                let res = await apisetting.getByGraphQl(query)
-
-                if (res.length !== 0) {
+                // var query = `query 
+                //     { doc(docid: \"${whatDocument}\" ) 
+                //     { 
+                //         docname
+                //         text
+                //         allowed_user
+                //     } 
+                // }`
+                //let res = await apisetting.getByGraphQl(query)
+                let res = await apisetting.getSpecificDocument(whatDocument)
+                console.log(res[0].docs[0])
+                
+                if (res.length > 0) {
                     setTheDocument([
-                        res.data.doc.text, 
-                        res.data.doc.docname,
-                        whatDocument, 
-                        res.data.doc.allowed_user
+                        res[0].docs[0].text,
+                        res[0].docs[0].docname,
+                        whatDocument,
+                        res[0].docs[0].allowed_user,
                     ])
+
+                    // setTheDocument([
+                    //     res.data.doc.text, 
+                    //     res.data.doc.docname,
+                    //     whatDocument, 
+                    //     res.data.doc.allowed_user
+                    // ])
                 }
             }
           }
@@ -73,10 +82,10 @@ const Form = () => {
         const handleClick = async(e) => {
             handleAuthDocuments();
         }
-
+/* 
         if (!myContext.authorized) {
             return <Redirect to="/login"/>;
-        }
+        } */
         return (
         <Wrapper>
             <Content>

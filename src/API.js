@@ -30,6 +30,7 @@ const apisetting = {
 				}) 
 			})
 		  ).json();
+		  console.log(documents, "HÄÄÄÄÄÄÄÄÄR")
 		return documents;
 	},
 
@@ -86,6 +87,7 @@ const apisetting = {
 				})
 			})
 		  ).json();
+			console.log(document)
 			if (document.data.msg === "Got a POST request, sending back 201 Created") {
 				return document
 			} else {
@@ -201,7 +203,7 @@ const apisetting = {
 
 	inviteUser2Doc: async (email, user, token) => {
 	
-		const endpoint = `${API_URL_INVITE}`
+		const endpoint = `${API_URL_INVITE}`;
 		const defaultConfigAuthPost = {
 			method: 'POST',
 			headers: {
@@ -210,15 +212,14 @@ const apisetting = {
 				'x-access-token': token
 			},
 		};
-		console.log(token, user, email
-			)
 		const inviteConfirmation = await (
 			await fetch(endpoint, {
 			  	...defaultConfigAuthPost,
 			  	body: JSON.stringify( {email: email, user: user } )
 			})
 		  ).json();
-		  console.log("inviteConfirmation", inviteConfirmation)
+		  console.log(inviteConfirmation)
+
 		return inviteConfirmation;
 	}
 

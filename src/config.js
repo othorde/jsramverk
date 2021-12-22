@@ -6,12 +6,12 @@ const API_URL_GRAPHQL = 'https://jsramverk-editor-olto20.azurewebsites.net/graph
 const API_URL_INVITE = 'https://jsramverk-editor-olto20.azurewebsites.net/invite';
 
 
-/* const API_URL = 'http://localhost:1337/list';
-const API_URL_LOGIN = 'http://localhost:1337/login';
-const API_PUT_DOC = 'http://localhost:1337/doc';
-const API_URL_AUTHFORUSER = 'http://localhost:1337/authforuser';
-const API_URL_GRAPHQL = 'http://localhost:1337/graphql';
-const API_URL_INVITE = 'http://localhost:1337/invite'; */
+// const API_URL = 'http://localhost:1337/list';
+// const API_URL_LOGIN = 'http://localhost:1337/login';
+// const API_PUT_DOC = 'http://localhost:1337/doc';
+// const API_URL_AUTHFORUSER = 'http://localhost:1337/authforuser';
+// const API_URL_GRAPHQL = 'http://localhost:1337/graphql';
+// const API_URL_INVITE = 'http://localhost:1337/invite';
 
 export {
     API_URL,
