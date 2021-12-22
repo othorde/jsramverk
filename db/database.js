@@ -8,8 +8,8 @@ let username;
 
 const database = {
     getDb: async function getDb () {
-
-        //let dsn = "mongodb://localhost:27017/mumin";
+        //            dsn = `mongodb+srv://${username}:${password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`;
+        /*  = "mongodb://localhost:27017/mumin" */
         let dsn;
         if (process.env.NODE_ENV !== "test") {
 
@@ -24,7 +24,7 @@ const database = {
         } else {
             username =  "texteditor";
             password =  "hejhej";
-            dsn = `mongodb+srv://${username}:${password}@cluster0.gywby.mongodb.net/test?retryWrites=true&w=majority`
+            dsn = `mongodb+srv://${username}:${password}@cluster0.gywby.mongodb.net/mumin?retryWrites=true&w=majority`
         }
 
         const client  = await mongo.connect(dsn, {

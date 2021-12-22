@@ -20,7 +20,6 @@ describe('#findAll()', function() {
 
     it("find only two users, should return first and second user", async function() {
         const users = await findAll.findAllDoc({}, {}, 2);
-        console.log(users[0].name, users[1].name, users[2]);
         assert.equal(users[0].name, "test1")
         assert.equal(users[1].name, "test2")
         assert.equal(users[2], undefined)

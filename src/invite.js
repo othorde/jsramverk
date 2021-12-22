@@ -10,7 +10,7 @@ const invite = {
 
 			const msg = {
 				to: `${req.body.email}`,
-				from: 'o.thordeman@live.se', // Use the email address or domain you verified above
+				from: 'angelaandersson1@hotmail.com', // Use the email address or domain you verified above
 				subject: `${req.body.user} bjuder in dig till att redigera dokument'`,
 				text: 'När du har skapat ett konto har du möjlighet att redigera dokumentet',
 				html: '<link> https://www.student.bth.se/~olto20/editor/?#/registrera </link>',
@@ -18,6 +18,7 @@ const invite = {
 
 			try {
 				let sendMail = await sgMail.send(msg);
+				console.log(sendMail)
 				if (sendMail[0].statusCode == 202) {
 					return true
 				} else {

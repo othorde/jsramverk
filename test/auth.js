@@ -14,7 +14,6 @@ beforeEach(async function() {
 		{ name: "test2", email: "test2@live.se", psw: "123432", docs: [{ docname: "test2Dok", docid: "234234", text: "doc2text", allowed_user: ["test2@live.se"] }] },
 		{ name: "test3", email: "test3@live.se", psw: "123433", docs: [{ docname: "test3Dok", docid: "345345", text: "doc3text", allowed_user: ["test3@live.se", "test2@live.se", "test1@live.se"] }] },
 	])
-	await db.client.close();
 });
 
 

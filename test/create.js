@@ -12,9 +12,9 @@ describe('#create()', function() {
     it('creats a user, returns true if created', async function() {
       	var user = await create.createUser(req = {
 			body: {
-				user: "NyAnvandare",
+				user: "NyAnvandare1",
 				psw: "12345",
-				email: "nyanvandare@live.se"
+				email: "nyanvandare@live.se1"
 			}
 		});
 		assert.equal(user, true);
@@ -23,13 +23,12 @@ describe('#create()', function() {
 
 		var user1 = await create.createUser(req = {
 			body: {
-				user:'NyAnvandare',
+				user:'NyAnvandare1',
 				psw: "12345",
-				email: "nyanvandare@live.se"
+				email: "nyanvandare@live.se1"
 			}
 		});
 
-		console.log(user1)
 
 		assert.equal(user1, false)
 	});
@@ -55,3 +54,6 @@ describe('#create()', function() {
 	})
 });
 
+after(async function() {
+    await database.resetDb() // denna stänger också db
+});

@@ -39,7 +39,6 @@ router.get("/lists/:id", async (req, response, next) => {
     try {
     const id = req.params.id;
     let res = await find.findDocument(id);
-
     response.json(res);
 } catch (err) {
     }
@@ -119,6 +118,7 @@ router.put("/list", async (req, res, next) => {
 
 //checklogin
 router.post("/login", async (req, res) => {
+    console.log("LOGIN ")
 
     try {
         let result = await findUser.findUser(req, res);
@@ -180,7 +180,7 @@ router.put("/doc", async (req, res, next) => {
 });
 
 router.put("/authforuser", async (req, res, next) => {
-
+    console.log("AUTH ")
     try {
         await auth.checkToken(req, res, next);
         const result = await update.updateAuthForUser(req, res);

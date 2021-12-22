@@ -20,7 +20,6 @@ describe('#update document()', async function() {
 
         let foundDoc = await find.findDocument("123123");
         let newtext = foundDoc[0].docs[0].text;
-        console.log(newtext)
         assert.equal(updatedDoc, true)
         assert.equal(newtext, "Ny text")
 
@@ -56,7 +55,6 @@ describe('#update users document()', async function() {
 
         let foundDoc = await find.findDocument("123123");
         let newtext = foundDoc[0].docs[0].text;
-        console.log(newtext)
         assert.equal(updatedDoc, undefined)
         assert.equal(newtext, "Ny text")
 
@@ -113,4 +111,7 @@ describe('#update users document()', async function() {
 
 
 
+});
+after(async function() {
+    await database.resetDb() // denna stänger också db
 });
